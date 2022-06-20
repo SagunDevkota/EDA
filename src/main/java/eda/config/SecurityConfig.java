@@ -21,11 +21,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http.
 		authorizeRequests()
 		.antMatchers("/").permitAll()
+		.antMatchers("/login").permitAll()
 		.antMatchers("/home").authenticated()//.hasRole() for role based access
 		.antMatchers("/user/*").authenticated()
 		.and()
-			.formLogin()
+			.formLogin().loginPage("/login")//.loginProcessingUrl(null)
 			.and()
-			.httpBasic();
+			.httpBasic()
+			.and()
+			.logout();
 	}
 }
