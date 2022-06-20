@@ -1,6 +1,7 @@
- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>  
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored = "false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,6 +15,14 @@
     <title>Hello, world!</title>
   </head>
   <body>
+  <c:if test="${param.error!=null }">
+  	<i style="color : red;">Error Login</i>
+  </c:if>
+  
+  <c:if test="${param.logout!=null }">
+  	<i style="color : green;">Successfully Logged out</i>
+  </c:if>
+  
   <div class="container mt-5">
 	    <form:form>
    		  <div class="form-group">
