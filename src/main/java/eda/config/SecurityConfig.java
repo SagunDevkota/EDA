@@ -19,12 +19,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.
-		authorizeRequests().
-		anyRequest().
-		authenticated().
-		and().
-		formLogin().
-		and().
-		httpBasic();
+		authorizeRequests()
+		.antMatchers("/").permitAll()
+		.antMatchers("/home").authenticated()//.hasRole() for role based access
+		.antMatchers("/user/*").authenticated()
+		.and()
+			.formLogin()
+			.and()
+			.httpBasic();
 	}
 }
