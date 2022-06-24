@@ -22,4 +22,9 @@ public class HomeController {
 		model.addAttribute("name", name);
 		return "user";
 	}
+	
+	@RequestMapping("/auth")
+	public String auth() {
+		return "auth";
+	}
 }

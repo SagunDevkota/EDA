@@ -1,19 +1,41 @@
 package eda.config;
 
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import eda.service.UserDetailServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //to create the spring security filter chain
+	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	UserDetailServiceImpl userDetailServiceImpl; 
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("sagun")
-		.password("{bcrypt}$2a$12$UL.HyGUxf4aSTD6nyf4c2uMBmn72z1zWo6w01OgCK7xJEaSimpoe2")
-		.roles("admin");
+//		jdbcTemplate.execute("Select id FROM clients WHERE email = ?");
+//		auth.jdbcAuthentication()
+//		.usersByUsernameQuery("SELECT email,password,id FROM clients WHERE email=?")
+//		.authoritiesByUsernameQuery("SELECT email,Role from clients where email=?")
+//		.dataSource(dataSource)
+//		.passwordEncoder(passwordEncoder);
+		
+		auth.userDetailsService(userDetailServiceImpl).passwordEncoder(passwordEncoder);
 	}
 	
 	@Override
