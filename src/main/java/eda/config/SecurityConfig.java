@@ -35,11 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //		.dataSource(dataSource)
 //		.passwordEncoder(passwordEncoder);
 		
+		// to authenticate user based on data retrieved from userDetailServiceImpl.
 		auth.userDetailsService(userDetailServiceImpl).passwordEncoder(passwordEncoder);
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//provide login/logout page and access control
 		http.
 		authorizeRequests()
 		.antMatchers("/").permitAll()

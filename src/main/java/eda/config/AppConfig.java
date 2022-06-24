@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan("eda")
+@ComponentScan("eda")// Kun chai package vitra component haru search garni
 public class AppConfig {
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
@@ -27,11 +27,13 @@ public class AppConfig {
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
+		// to store and verify encoded password
 		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean
 	public DataSource dataSource() {
+		//Database configuration
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost/springjdbc");
@@ -42,12 +44,14 @@ public class AppConfig {
 	
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
+		// To run jdbc query
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
 	
 	@Bean
 	public JdbcUserDetailsManager jdbcUserDetailsManager() {
+		// Not used currently
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource());
 		return jdbcUserDetailsManager;
 	}

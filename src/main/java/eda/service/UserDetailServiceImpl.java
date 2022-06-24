@@ -18,6 +18,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// to load user from database and create new user(eda.dto) instance
 		eda.dto.User user = userDAO.findUserByUsername(username);
 		if(user == null) {
 			throw new UsernameNotFoundException(username+" not found");
