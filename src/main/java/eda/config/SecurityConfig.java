@@ -2,12 +2,14 @@ package eda.config;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 import eda.service.UserDetailServiceImpl;
 
@@ -26,6 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	UserDetailServiceImpl userDetailServiceImpl; 
 	
+	
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		jdbcTemplate.execute("Select id FROM clients WHERE email = ?");
@@ -38,7 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// to authenticate user based on data retrieved from userDetailServiceImpl.
 		auth.userDetailsService(userDetailServiceImpl).passwordEncoder(passwordEncoder);
 	}
-	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//provide login/logout page and access control
@@ -47,6 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/").permitAll()
 		.antMatchers("/login").permitAll()
 		.antMatchers("/home").authenticated()//.hasRole() for role based access
+		.antMatchers("/upload").authenticated()
+		.antMatchers("/uploadFile").authenticated()
 		.antMatchers("/user/*").authenticated()
 		.and()
 			.formLogin()
