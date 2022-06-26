@@ -49,10 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/home").authenticated()//.hasRole() for role based access
 		.antMatchers("/user/*").authenticated()
 		.and()
-			.formLogin().loginPage("/login")//.loginProcessingUrl(null)
+			.formLogin()
+			.loginPage("/login")
+			.failureUrl("/login?error=true")//.loginProcessingUrl(null)
 			.and()
 			.httpBasic()
 			.and()
-			.logout();
+			.logout()
+			.logoutSuccessUrl("/login?logout=true")
+			.invalidateHttpSession(true);
 	}
 }
