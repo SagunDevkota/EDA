@@ -3,6 +3,7 @@ package eda.controller;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import eda.dto.UploadedFile;
+import eda.report.report.ReportInitiator;
 
 @Controller
 public class FileController {
@@ -53,5 +55,20 @@ public class FileController {
 			}
 		}
 		return "done";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/report")
+	public String showReport(@RequestParam("name") String fileName,HttpSession session) {
+		System.out.println(fileName);
+		ReportInitiator reportInitiator = new ReportInitiator();
+		HashMap<String, Object> report = new HashMap<>();
+		try {
+			report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+fileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return report.toString();
 	}
 }
