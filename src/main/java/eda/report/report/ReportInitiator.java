@@ -1,0 +1,33 @@
+package eda.report.report;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import eda.report.preprocessing.ReadCSV;
+
+public class ReportInitiator {
+	
+	/**
+	 * 
+	 * @param fileName Name of file to be read
+	 * @return	Returns entire report of DataSet
+	 * @throws IOException
+	 */
+	public HashMap<String, Object> getReport(String fileName) throws IOException{
+		ReadCSV readCSV = new ReadCSV("F://credits.csv");
+		ArrayList<List<String>> data = readCSV.getCSVData();
+		List<String> headers = readCSV.getHeaders();
+		String[] dataType = readCSV.getDataType(data);
+		
+		ReportEvaluator reportEvaluator = new ReportEvaluator();
+		
+		HashMap<String, Object> entireReport = new HashMap<>();
+		HashMap<String, Object> dataSetMetadata = reportEvaluator.getDataSetMetadata(readCSV);
+		List<HashMap<String, Object>> columnMetadata = reportEvaluator.getColumnMetadata(data,headers,dataType);
+		entireReport.put("dataSetReport", dataSetMetadata);
+		entireReport.put("columnReport", columnMetadata);
+		return entireReport;
+	}
+}
