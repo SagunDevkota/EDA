@@ -9,17 +9,19 @@
 </head>
 <body>
   <div class="cont">
-    <div class="form sign-in">
-      <h2>Sign In</h2>
+    <form class="form sign-in" >
+        <h2>Sign In</h2>
       <label>
         <span>Email</span>
-        <input type="email" name="email">
+        <input type="email" name="username" id="email">
+        <p id="emError"></p>
       </label>
       <label>
         <span>Password</span>
-        <input type="password" name="password">
+        <input type="password" name="password" id="password">
+        <p id="pwError"></p>
       </label>
-      <button class="submit" type="button">Sign In</button>
+      <button class="submit" type="button" onclick="validateForm()">Sign In</button>
       <p class="forgot-pass">Forgot Password ?</p>
 
       <div class="social-media">
@@ -30,7 +32,7 @@
           <li><img src="../resources/images/instagram.png"></li>
         </ul>
       </div>
-    </div>
+    </form>
 
     <div class="sub-cont">
       <div class="img">
