@@ -6,8 +6,8 @@ document.querySelector('.img-btn').addEventListener('click', function()
 
 document.getElementById("sInButton").addEventListener('click', validateForm);
 
-function validateForm(e) {
-	e.preventDefault();
+function validateForm(event) {
+	event.preventDefault();
 	var em = document.getElementById("email").value;
 	var pw = document.getElementById("password").value;
 	var regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
