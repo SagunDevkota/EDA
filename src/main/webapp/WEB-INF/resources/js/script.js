@@ -4,7 +4,10 @@ document.querySelector('.img-btn').addEventListener('click', function()
 	}
 );
 
-function validateForm() {
+document.getElementById("sInButton").addEventListener('click', validateForm);
+
+function validateForm(e) {
+	e.preventDefault();
 	var em = document.getElementById("email").value;
 	var pw = document.getElementById("password").value;
 	var regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -17,5 +20,5 @@ function validateForm() {
 	if(pw == "") {
 		document.getElementById("pwError").innerHTML = "password is required";
 	}
-}
+};
 
