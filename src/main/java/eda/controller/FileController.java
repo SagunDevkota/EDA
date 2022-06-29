@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,11 @@ import eda.report.report.ReportInitiator;
 
 @Controller
 public class FileController {
+	
+
+	@Autowired
+	ReportInitiator reportInitiator;
+	
 	@RequestMapping("/upload")
 	public String upload(Model model) {
 		model.addAttribute("uploadedFile", new UploadedFile());
@@ -61,7 +67,6 @@ public class FileController {
 	@RequestMapping("/report")
 	public String showReport(@RequestParam("name") String fileName,HttpSession session) {
 		System.out.println(fileName);
-		ReportInitiator reportInitiator = new ReportInitiator();
 		HashMap<String, Object> report = new HashMap<>();
 		try {
 			report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+fileName);

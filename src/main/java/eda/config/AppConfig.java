@@ -18,6 +18,8 @@ import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import eda.report.report.ReportInitiator;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan("eda")// Kun chai package vitra component haru search garni
@@ -67,5 +69,10 @@ public class AppConfig {
 	    commonsMultipartResolver.setMaxUploadSize(1073741824);//1GB
 	    commonsMultipartResolver.setDefaultEncoding("UTF-8");
 	    return commonsMultipartResolver;
+	}
+	
+	@Bean
+	public ReportInitiator reportInitiator() {
+		return new ReportInitiator();
 	}
 }
