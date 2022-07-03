@@ -26,8 +26,11 @@ public class ReportInitiator {
 		HashMap<String, Object> entireReport = new HashMap<>();
 		HashMap<String, Object> dataSetMetadata = reportEvaluator.getDataSetMetadata(readCSV);
 		List<HashMap<String, Object>> columnMetadata = reportEvaluator.getColumnMetadata(data,headers,dataType);
+		HashMap<String,HashMap<String,Double>> correlationData = reportEvaluator.getCorrelationData(data,headers,dataType,columnMetadata);
+		
 		entireReport.put("dataSetReport", dataSetMetadata);
 		entireReport.put("columnReport", columnMetadata);
+		entireReport.put("correlationTable", correlationData);
 		return entireReport;
 	}
 }
