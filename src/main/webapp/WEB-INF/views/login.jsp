@@ -1,47 +1,87 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored = "false"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-  <c:if test="${param.error!=null }">
-  	<i style="color : red;">Error Login</i>
-  </c:if>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EDA</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cont">
+    <div>
+      <!-- form ma action, method rakheko xaina.   -->
+        <form:form id="signIn" class="form sign-in" onsubmit="return validateSinForm()" >
+          <h2>Sign In</h2>
+          <label>
+            <span>Email</span>
+            <input type="text" name="username" id="email">
+            <p id="emError"></p>
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" name="password" id="password">
+            <p id="pwError"></p>
+          </label>
+<!--           <button class="submit" type="submit" id="sInButton"> SIGN IN </button> -->
+  		<button type="submit" class="submit"> SIGN IN </button>
+          <p class="forgot-pass">Forgot Password ?</p>
   
-  <c:if test="${param.logout!=null }">
-  	<i style="color : green;">Successfully Logged out</i>
-  </c:if>
-  
-  <div class="container mt-5">
-	    <form:form>
-   		  <div class="form-group">
-		    <label for="name-lbl">Name</label>
-		    <input type="text" name="username" class="form-control" id="name-lbl" placeholder="Name">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Password</label>
-		    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		  </div>
-		  <div class="container mt-5 text-center">
-		  	<button type="submit" class="btn btn-primary">Submit</button>
-		  </div>
-		</form:form>
-	</div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+      <div class="social-media">
+        <ul>
+          <li><img src="<c:url value="/resources/images/facebook.png"/>"></li>
+          <li><img src="<c:url value="/resources/images/twitter.png"/>"></li>
+          <li><img src="<c:url value="/resources/images/linkedin.png"/>"></li>
+          <li><img src="<c:url value="/resources/images/instagram.png"/>"></li>
+        </ul>
+      </div>
+    </form:form>
+
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img-text m-up">
+          <h2>New here?</h2>
+          <p>Sign up now if you're new!!</p>
+        </div>
+        <div class="img-text m-in">
+          <h2>Have an account already?</h2>
+          <p>Sign in, if you already have an account!!</p>
+        </div>
+        <div class="img-btn">
+          <span class="m-up">Sign Up</span>
+          <span class="m-in">Sign In</span>
+        </div>
+      </div>
+      <form:form action="process-signup" class="form sign-up" id="signUp" onsubmit="return validateSupForm()">
+        <h2>Sign Up</h2>
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" id="sUpName">
+          <p id="sUpNameError"></p>
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="text" name="username" id="sUpEmail">
+          <p id="sUpEmError"></p>
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" name="password" id="sUpPassword">
+          <p id="sUpPwError"></p>
+        </label>
+        <label>
+          <span>Confirm Password</span>
+          <input type="password" name="conPassword" id="sUpConPassword">
+          <p id="sUpConfirmPwError"></p>
+        </label>
+        <button class="submit" type="submit" id="sUpButton"> SIGN UP </button>
+      </form:form>
+    </div>
+  </div>
+<script type="text/javascript" src="<c:url value="/resources/js/script.js"/>"></script>
+</body>
 </html>
