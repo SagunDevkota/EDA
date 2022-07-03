@@ -10,7 +10,7 @@ import java.util.List;
  * Provides insights for categorical type of column.
  */
 public class CategoricalColumnInsights {
-	double missing,distinct;
+	private double missing,distinct,minLength,maxLength,totalLength,itemCount;
 	List<String> row;
 	
 	/**
@@ -42,14 +42,35 @@ public class CategoricalColumnInsights {
 		return missing;
 	}
 	
+	private double getMinLength(){
+		return minLength;
+	}
+	
+	private double getMaxLength() {
+		return maxLength;
+	}
+	
+	private double getAverageLength() {
+		return totalLength/itemCount;
+	}
 	/**
 	 * 
 	 * @return: Returns HashMap with frequency of each occurrence of every data.
 	 */
 	public HashMap<String, Integer> getFrequencyData(){
 		HashMap<String,Integer> frequency = new HashMap<>();
+		minLength = row.get(0).length();
+		maxLength = row.get(0).length();
 		for(int i = 0;i<row.size();i++) {
+			int currentLength = row.get(i).length();
+			if(currentLength < minLength){
+				minLength = currentLength;
+			}else if(currentLength > maxLength) {
+				maxLength = currentLength;
+			}
 			if(row.get(i) != null && !row.get(i).equals("")) {
+				itemCount++;
+				totalLength += currentLength;
 				if(frequency.get(""+row.get(i)) == null) {
 					frequency.put(""+row.get(i), 1);
 				}else {
@@ -68,6 +89,9 @@ public class CategoricalColumnInsights {
 		HashMap<String,Double> map = new HashMap<>();
 		map.put("Missing", getMissing());
 		map.put("Distinct", getDistinct());
+		map.put("MinimumLength", getMinLength());
+		map.put("MaximumLength", getMaxLength());
+		map.put("AverageLength", getAverageLength());
 		return map;
 	}
 	
