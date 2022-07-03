@@ -12,10 +12,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
+	
 	
 	@RequestMapping("/user/{name}")
 	public String user(@PathVariable("name") String name,Model model) {
