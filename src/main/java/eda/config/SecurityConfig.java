@@ -1,24 +1,18 @@
 package eda.config;
 
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.multipart.support.MultipartFilter;
 
 import eda.service.UserDetailServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-//to create the spring security filter chain
-	@Autowired
-	private DataSource dataSource;
-	
+//to create the spring security filter chain	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
