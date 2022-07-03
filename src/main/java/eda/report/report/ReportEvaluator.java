@@ -89,5 +89,52 @@ public class ReportEvaluator {
 		dataSet.put("missing", readCSV.getMissing());
 		return dataSet;
 	}
+
+
+	@SuppressWarnings("unchecked")
+	public HashMap<String, HashMap<String, Double>> getCorrelationData(ArrayList<List<String>> data,
+			List<String> headers, String[] dataType,List<HashMap<String, Object>> columnMetadata) {
+		HashMap<String, HashMap<String, Double>> correlationTable = new HashMap<>();
+		ArrayList<Integer> numericData = getOnlyNumericColumn(data,dataType);
+		System.out.println(numericData.size()+" "+data.get(numericData.get(0)).size());
+		for(int i = 0;i<numericData.size();i++) {
+			double meanX = ((HashMap<String, Double>) columnMetadata.get(numericData.get(i)).get("columnMetadata")).get("Mean");
+//			System.out.println(meanX+" "+headers.get(numericData.get(i)));
+			HashMap<String, Double> map = new HashMap<>();
+			for(int j = 0;j<numericData.size();j++) {
+				int countObservation = 0;
+				double partialSum = 0;
+				double meanY = 0;
+				for(int k = 0;k<data.get(numericData.get(i)).size();k++) {
+					meanY = ((HashMap<String, Double>) columnMetadata.get(numericData.get(j)).get("columnMetadata")).get("Mean");
+					if(!(data.get(numericData.get(i)).get(k).equals("") || data.get(numericData.get(j)).get(k).equals(""))) {
+//						System.out.println(data.get(numericData.get(i)).get(k)+" "+data.get(numericData.get(j)).get(k));
+						double XXbar = Double.parseDouble(data.get(numericData.get(i)).get(k))-meanX;
+						double YYbar = Double.parseDouble(data.get(numericData.get(j)).get(k))-meanY;
+						countObservation++;
+						partialSum+=(XXbar*YYbar);
+					}
+				}
+				double varX = ((HashMap<String, Double>) columnMetadata.get(numericData.get(i)).get("numStats")).get("Standard Deviation");
+				double varY = ((HashMap<String, Double>) columnMetadata.get(numericData.get(j)).get("numStats")).get("Standard Deviation");
+				map.put(headers.get(numericData.get(j)), (partialSum/countObservation)/(varX*varY));
+//				System.out.println((partialSum/countObservation)/(varX*varY)+" "+headers.get(numericData.get(i))+" "+headers.get(numericData.get(j))+" "+meanX+" "+meanY);
+			}
+			correlationTable.put(headers.get(numericData.get(i)), map);
+		}
+//		System.out.println(numericData);
+		return correlationTable;
+	}
+
+
+	private ArrayList<Integer> getOnlyNumericColumn(ArrayList<List<String>> data, String[] dataType) {
+		ArrayList<Integer> numericData = new ArrayList<>();
+		for(int i = 0;i<dataType.length;i++) {
+			if(dataType[i].equals(Constants.NUMERIC)) {
+				numericData.add(i);
+			}
+		}
+		return numericData;
+	}
 	
 }
