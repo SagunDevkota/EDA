@@ -16,13 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.google.gson.Gson;
+
 import eda.dto.UploadedFile;
 import eda.report.report.ReportInitiator;
 
 @Controller
 public class FileController {
 	
-
+	@Autowired
+	Gson gson;
+	
 	@Autowired
 	ReportInitiator reportInitiator;
 	
@@ -63,9 +67,8 @@ public class FileController {
 		return "done";
 	}
 	
-	@ResponseBody
 	@RequestMapping("/report")
-	public String showReport(@RequestParam("name") String fileName,HttpSession session) {
+	public String showReport(@RequestParam("name") String fileName,HttpSession session,Model model) {
 		System.out.println(fileName);
 		HashMap<String, Object> report = new HashMap<>();
 		try {
@@ -74,6 +77,7 @@ public class FileController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return report.toString();
+		model.addAttribute("json", gson.toJson(report));
+		return "report";
 	}
 }
