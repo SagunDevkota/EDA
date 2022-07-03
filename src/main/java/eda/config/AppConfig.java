@@ -14,6 +14,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import eda.report.report.ReportInitiator;
 
 @EnableWebMvc
@@ -70,5 +73,10 @@ public class AppConfig {
 	@Bean
 	public ReportInitiator reportInitiator() {
 		return new ReportInitiator();
+	}
+	
+	@Bean
+	public Gson gson() {
+		return new GsonBuilder().setPrettyPrinting().create();
 	}
 }
