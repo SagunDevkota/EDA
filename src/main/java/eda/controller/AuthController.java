@@ -24,8 +24,8 @@ public class AuthController {
 		try {
 			userInfoDAOImpl.saveUserInfo(userInfo);
 		}catch(DuplicateKeyException e) {
-			return "redirect:auth?error=User already exists";
+			return "redirect:login?error=User already exists";
 		}
-		return "redirect:auth?success=true";
+		return "redirect:login?success=true";
 	}
 }
