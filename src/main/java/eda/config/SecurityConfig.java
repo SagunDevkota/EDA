@@ -44,13 +44,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/").permitAll()
 		.antMatchers("/login").permitAll()
 		.antMatchers("/process-signup").permitAll()
-		.antMatchers("/dashboard").permitAll()//.hasRole() for role based access
+		.antMatchers("/dashboard").authenticated()//.hasRole() for role based access
 		.antMatchers("/upload").authenticated()
+		.antMatchers("/report").authenticated()
 		.antMatchers("/uploadFile").authenticated()
 		.antMatchers("/user/*").authenticated()
 		.and()
 			.formLogin()
 			.loginPage("/login")
+			.defaultSuccessUrl("/dashboard",true)
 			.failureUrl("/login?error=true")//.loginProcessingUrl(null)
 			.and()
 			.httpBasic()
