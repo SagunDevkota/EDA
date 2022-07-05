@@ -147,11 +147,6 @@ section{
     max-width: 60rem;
 }
 
-/* .home .content h3{
-    font-size: 6rem;
-    text-transform: uppercase;
-    color:#fff;
-} */
 
 .home .content p{
     font-size: 2.2rem;
@@ -303,12 +298,6 @@ section{
 
 
 
-
-
-
-
-
-
 /* media queries  */
 @media (max-width:991px){
 
@@ -379,4 +368,9 @@ section{
         font-size: 50%;
     }
 
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
 }
