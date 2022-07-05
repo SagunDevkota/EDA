@@ -42,7 +42,7 @@ public class AppConfig {
 		//Database configuration
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost/springjdbc");
+		ds.setUrl("jdbc:mysql://localhost/eda");
 		ds.setUsername("root");
 		ds.setPassword("");
 		return ds;
