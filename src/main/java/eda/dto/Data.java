@@ -1,0 +1,60 @@
+package eda.dto;
+
+import java.sql.Timestamp;
+
+public class Data {
+	int id;
+	String fileName;
+	String fileUrl;
+	int ownerId;
+	long fileSize;
+	Timestamp createdTime;
+	int hash;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getFileUrl() {
+		return fileUrl;
+	}
+	public void setFileUrl(String fileUrl) {
+		this.fileUrl = fileUrl;
+	}
+	public int getOwnerId() {
+		return ownerId;
+	}
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
+	public long getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+	public Timestamp getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(Timestamp createdTime) {
+		this.createdTime = createdTime;
+	}
+	public int getHash() {
+		return hash;
+	}
+	public void setHash(int hash) {
+		this.hash = hash;
+	}
+	@Override
+	public String toString() {
+		return "Data [id=" + id + ", fileName=" + fileName + ", fileUrl=" + fileUrl + ", ownerId=" + ownerId
+				+ ", fileSize=" + fileSize + ", createdTime=" + createdTime + ", hash=" + hash + "]";
+	}
+}
