@@ -8,18 +8,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import eda.dao.UserDAO;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
+	
+	@Autowired
+	eda.dto.User user;
+	
 	@Autowired
 	private UserDAO userDAO;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// to load user from database and create new user(eda.dto) instance
-		eda.dto.User user = userDAO.findUserByUsername(username);
+		user.setId(userDAO.findUserByUsername(username).getId());
+		user.setEmail(userDAO.findUserByUsername(username).getEmail());
+		user.setPassword(userDAO.findUserByUsername(username).getPassword());
+		user.setFullName(userDAO.findUserByUsername(username).getFullName());
 		if(user == null) {
 			throw new UsernameNotFoundException(username+" not found");
 		}
