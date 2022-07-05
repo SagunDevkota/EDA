@@ -8,6 +8,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,16 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
 
+import eda.dao.DataDAOImpl;
 import eda.dto.UploadedFile;
 import eda.report.report.ReportInitiator;
+import eda.dto.User;
 
 @Controller
 public class FileController {
+	
+	@Autowired
+	DataDAOImpl dataDAOImpl;
 	
 	@Autowired
 	Gson gson;
@@ -71,6 +78,7 @@ public class FileController {
 	public String showReport(@RequestParam("name") String fileName,HttpSession session,Model model) {
 		System.out.println(fileName);
 		HashMap<String, Object> report = new HashMap<>();
+		System.out.println(dataDAOImpl.contains(12345)+" "+session.getAttribute("id"));
 		try {
 			report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+fileName);
 		} catch (IOException e) {
