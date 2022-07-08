@@ -6,8 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.DefaultLoginPageConfigurer;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 
+import eda.filter.LoginFilter;
 import eda.service.UserDetailServiceImpl;
 
 @EnableWebSecurity
@@ -39,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//provide login/logout page and access control
+		http.addFilterBefore(new LoginFilter(), DefaultLoginPageGeneratingFilter.class);
 		http.
 		authorizeRequests()
 		.antMatchers("/").permitAll()
