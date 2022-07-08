@@ -14,12 +14,6 @@ public class DataDAOImpl implements DataDAO {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	@Override
-	public Data getData(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void saveData(Data data) {
@@ -40,15 +34,12 @@ public class DataDAOImpl implements DataDAO {
 	}
 
 	@Override
-	public boolean contains(long hash) {
-		String query = "SELECT * from data WHERE hash = ?";
-		Object[] args = new Object[] {hash};
-		int[] argsType = new int[] {Types.BIGINT};
+	public Data getData(long hash,int owner) {
+		String query = "SELECT * from data WHERE hash = ? and owner_id = ?";
+		Object[] args = new Object[] {hash,owner};
+		int[] argsType = new int[] {Types.BIGINT,Types.INTEGER};
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
-		if(result.size()>0) {
-			return true;
-		}
-		return false;
+		return result.size()>0?result.get(0):null;
 	}
 	
 }
