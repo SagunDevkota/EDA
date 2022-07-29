@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<pre>${json }</pre>
+	<%if(request.getAttribute("error")==null){ %>
+		<pre>${json }</pre>
+	<%}else{ %>
+		<h1>${error }</h1>
+	<%} %>
 </body>
 </html>
