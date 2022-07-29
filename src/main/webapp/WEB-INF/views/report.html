@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Report</title>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Item', 'Occurrence'],
+            ['A (a)', 12],
+            ['B (b)', 9],
+            ['C (c)', 12],
+            ['D (d)', 22],
+            ['E (e)', 1],
+            ['F (f)', 36],
+            ['G (g)', 9],
+            ['H (h)', 30],
+            ['I (i)', 6],
+            ['J (j)', 2],
+            ['K (k)', 9],
+            ['L (l)', 2],
+            ['M (m)', 27],
+            ['N (n)', 3],
+            ]);
+
+            var options = {
+            title: 'Occurrence of items, count',
+            legend: { position: 'none' },
+            };
+
+            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+        </script>
+    </head>
+  <body>
+    <div id="chart_div" style="width: 600px; height: 200px; position: relative; float: right;"></div>
+  </body>
+</html>
