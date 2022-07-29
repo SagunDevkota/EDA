@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%if(request.getAttribute("Error") != null){ %>
+	<%if(request.getAttribute("error") != null){ %>
 		<h1>Upload Filed due to ${Error}</h1>
 	<%} %>
 	<%if((boolean)request.getAttribute("response")){ %>
