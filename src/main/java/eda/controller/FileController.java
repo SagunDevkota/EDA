@@ -29,12 +29,6 @@ public class FileController {
 	@Autowired
 	DataDAOImpl dataDAOImpl;
 	
-	@Autowired
-	Gson gson;
-	
-	@Autowired
-	ReportInitiator reportInitiator;
-	
 	@RequestMapping("/upload")
 	public String upload(Model model) {
 		model.addAttribute("uploadedFile", new UploadedFile());
@@ -51,25 +45,11 @@ public class FileController {
 		try {
 			response = fileUploadService.uploadFileToDatabase();
 		} catch (IOException e) {
-			model.addAttribute("Error", e.getLocalizedMessage());
+			model.addAttribute("error", e.getLocalizedMessage());
 		} catch(DuplicateFileException e) {
-			model.addAttribute("Error", e.getLocalizedMessage());
+			model.addAttribute("error", e.getLocalizedMessage());
 		}
 		model.addAttribute("response", response);
 		return "UploadResponse";
-	}
-	
-	@RequestMapping("/report")
-	public String showReport(@RequestParam("name") String fileName,HttpSession session,Model model) {
-		System.out.println(fileName);
-		HashMap<String, Object> report = new HashMap<>();
-		try {
-			report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+fileName);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		model.addAttribute("json", gson.toJson(report));
-		return "report";
 	}
 }
