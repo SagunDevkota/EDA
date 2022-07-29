@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/dashboard").authenticated()//.hasRole() for role based access
 		.antMatchers("/upload").authenticated()
 		.antMatchers("/report").authenticated()
+		.antMatchers("/reports").authenticated()
 		.antMatchers("/uploadFile").authenticated()
 		.antMatchers("/user/*").authenticated()
 		.and()
