@@ -18,7 +18,7 @@ public class DataRowMapperImpl implements RowMapper<Data>{
 		data.setOwnerId(rs.getInt("owner_id"));
 		data.setFileSize(rs.getLong("file_size"));
 		data.setCreatedTime(rs.getTimestamp("created_time"));
-		data.setHash(rs.getInt("hash"));
+		data.setHash(rs.getString("hash"));
 		return data;
 	}
 

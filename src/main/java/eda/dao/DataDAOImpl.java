@@ -34,12 +34,21 @@ public class DataDAOImpl implements DataDAO {
 	}
 
 	@Override
-	public Data getData(long hash,int owner) {
+	public Data getData(String hash,int owner) {
 		String query = "SELECT * from data WHERE hash = ? and owner_id = ?";
 		Object[] args = new Object[] {hash,owner};
-		int[] argsType = new int[] {Types.BIGINT,Types.INTEGER};
+		int[] argsType = new int[] {Types.VARCHAR,Types.INTEGER};
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
 		return result.size()>0?result.get(0):null;
+	}
+
+	@Override
+	public List<Data> getAllData(int owner) {
+		String query = "SELECT * from data WHERE owner_id = ?";
+		Object[] args = new Object[] {owner};
+		int[] argsType = new int[] {Types.INTEGER};
+		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
+		return result;
 	}
 	
 }

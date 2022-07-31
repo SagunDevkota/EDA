@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Uploaded</h1>
+	<%if(request.getAttribute("error") != null){ %>
+		<h1>Upload Filed due to ${Error}</h1>
+	<%} %>
+	<%if((boolean)request.getAttribute("response")){ %>
+		<h1>File Uploaded ${response }</h1>
+	<%} %>
 </body>
 </html>

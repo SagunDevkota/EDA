@@ -20,7 +20,7 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "dashboard";
+		return "minidash";
 	}
 	
 	@RequestMapping("/dashboard")

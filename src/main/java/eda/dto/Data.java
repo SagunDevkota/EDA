@@ -9,7 +9,7 @@ public class Data {
 	int ownerId;
 	long fileSize;
 	Timestamp createdTime;
-	int hash;
+	String hash;
 	public int getId() {
 		return id;
 	}
@@ -46,10 +46,10 @@ public class Data {
 	public void setCreatedTime(Timestamp createdTime) {
 		this.createdTime = createdTime;
 	}
-	public int getHash() {
+	public String getHash() {
 		return hash;
 	}
-	public void setHash(int hash) {
+	public void setHash(String hash) {
 		this.hash = hash;
 	}
 	@Override
