@@ -374,3 +374,23 @@ section{
     height: 60px;
     width: 60px;
 }
+
+/* profile icon drop down */
+.header .profile-items-container{
+    position: absolute;
+    top:100%; right: -100%;
+    height: calc(26vh - 9.5rem);
+    width: 13rem;
+    background: #fff;
+    padding:0 1.5rem;
+}
+
+.header .profile-items-container.active{
+    right: 0;
+}
+
+.header .profile-items-container .profile-item .content h3{
+    font-size: 2rem;
+    color:var(--black);
+    padding-bottom: .5rem;
+}
