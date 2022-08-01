@@ -23,8 +23,8 @@
 				<%String fileName = d.getFileName();
 					float size = (d.getFileSize()/(float)1024);
 					Timestamp time = d.getCreatedTime();
-					String url = d.getHash();%>
-				<td><a href="./report?name=<%=url %>.csv" target="_blank"><%=fileName %></a></td>
+					int url = d.getId();%>
+				<td><a href="./report?id=<%=url %>" target="_blank"><%=fileName %></a></td>
 				<% %>
 				<td><%=size %> KB</td>
 				<td><%=time %></td>
