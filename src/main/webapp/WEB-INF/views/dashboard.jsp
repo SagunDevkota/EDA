@@ -47,7 +47,18 @@
 				<label for="search-box" class="fas fa-search"></label>
 			</div>
 	
-	
+			<div class="profile-items-container">
+		        <div class="profile-item">
+		            <div class="content">
+		                <h3><a href="#">option A</a></h3>
+		            </div>
+		        </div>
+		        <div class="profile-item">
+		            <div class="content">
+		               <h3><a href="#">option B</a></h3>
+		            </div>
+		        </div>
+		    </div>
 		</header>
 	
 		<!-- header ends -->

@@ -10,12 +10,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap" rel="stylesheet">
+    
 </head>
 <body>
   <div class="cont">
     <div>
       <!-- form ma action, method rakheko xaina.   -->
         <form:form id="signIn" class="form sign-in" onsubmit="return validateSinForm()" >
+        
+          <a href="<c:url value="/"/>"><img src="<c:url value="/resources/images/logo.jpg"/>" alt="logo" class="logo"></a>
           <h2>Sign In</h2>
           <label>
             <span>Email</span>
