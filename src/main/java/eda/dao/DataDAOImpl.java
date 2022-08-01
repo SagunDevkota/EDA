@@ -19,11 +19,16 @@ public class DataDAOImpl implements DataDAO {
 	public void saveData(Data data) {
 		String query = "INSERT INTO data (file_name,file_url,owner_id,file_size,hash) VALUES (?,?,?,?,?)";
 		jdbcTemplate.update(query,data.getFileName(),data.getFileUrl(),data.getOwnerId(),data.getFileSize(),data.getHash());
+		Data write = getData(data.getHash(),data.getOwnerId());
+		if(write == null) {
+			return;
+		}
+		String accessQuery = "INSERT INTO access (viewer_id,d_id) VALUES (?,?)";
+		jdbcTemplate.update(accessQuery,write.getOwnerId(),write.getId());
 	}
 
 	@Override
 	public boolean shareData(int id) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -41,7 +46,18 @@ public class DataDAOImpl implements DataDAO {
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
 		return result.size()>0?result.get(0):null;
 	}
-
+	
+	@Override
+	public Data getSharedData(int d_id,int viewer) {
+		System.out.println(d_id+" "+viewer);
+		String query = "SELECT * FROM data WHERE d_id IN (SELECT d_id from access WHERE d_id = ? and viewer_id = ?)";
+		Object[] args = new Object[] {d_id,viewer};
+		int[] argsType = new int[] {Types.INTEGER,Types.INTEGER};
+		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
+		System.out.println(result);
+		return result.size()>0?result.get(0):null;
+	}
+	
 	@Override
 	public List<Data> getAllData(int owner) {
 		String query = "SELECT * from data WHERE owner_id = ?";
