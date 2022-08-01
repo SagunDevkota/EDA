@@ -10,4 +10,5 @@ public interface DataDAO {
 	public boolean shareData(int id);
 	public boolean removeData(int id);
 	public List<Data> getAllData(int owner);
+	public Data getSharedData(int d_id,int viewer);
 }
