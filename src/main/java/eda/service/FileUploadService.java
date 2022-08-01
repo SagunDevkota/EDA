@@ -45,7 +45,11 @@ public class FileUploadService {
 			fos.write(bytes);
 			System.out.println("file uploaded at "+path);
 			fos.close();
-			dataDAOImpl.saveData(initData);
+			try {
+				dataDAOImpl.saveData(initData);
+			}catch(Exception e) {
+				throw new RuntimeException(e.getLocalizedMessage());
+			}
 			System.out.println("New file uploaded");
 		}else {
 			System.out.println("New file not uploaded");
@@ -58,8 +62,8 @@ public class FileUploadService {
 		data.setFileName(file.getOriginalFilename());
 		data.setFileSize(file.getSize());
 		data.setFileUrl(path);
-		data.setHash(hashedData);
 		data.setOwnerId((int)session.getAttribute("id"));
+		data.setHash(hashedData);
 		return data;
 	}
 	
