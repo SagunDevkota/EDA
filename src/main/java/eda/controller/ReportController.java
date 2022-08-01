@@ -39,14 +39,15 @@ public class ReportController {
 		return "reports";
 	}
 	
-	@RequestMapping(value = "/report" ,params = {"name"})
-	public String showReport(@RequestParam("name") String fileName,HttpSession session,Model model) {
+	@RequestMapping(value = "/report" ,params = {"id"})
+	public String showReport(@RequestParam("id") int fileId,HttpSession session,Model model) {
 		HashMap<String, Object> report = new HashMap<>();
-		System.out.println(fileName.split("[.]").length);
-		System.out.println(fileName);
+		System.out.println(fileId);
 		try {
-			if(dataDAOImpl.getData(fileName.split("[.]")[0], (int)session.getAttribute("id")) != null) {
-				report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+fileName);
+			Data shared = dataDAOImpl.getSharedData(fileId, (int)session.getAttribute("id"));
+			System.out.println(shared);
+			if((shared) != null) {
+				report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+shared.getHash()+".csv");
 			}else {
 				model.addAttribute("error", "You are not authorized");
 			}
