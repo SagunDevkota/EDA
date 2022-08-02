@@ -28,8 +28,9 @@ public class DataDAOImpl implements DataDAO {
 	}
 
 	@Override
-	public boolean shareData(int id) {
-		return false;
+	public void shareData(int viewerId,int dataId) {
+		String query = "INSERT INTO access (viewer_id,d_id) VALUES (?,?)";
+		jdbcTemplate.update(query,viewerId,dataId);
 	}
 
 	@Override
@@ -62,6 +63,15 @@ public class DataDAOImpl implements DataDAO {
 	public List<Data> getAllData(int owner) {
 		String query = "SELECT * from data WHERE owner_id = ?";
 		Object[] args = new Object[] {owner};
+		int[] argsType = new int[] {Types.INTEGER};
+		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
+		return result;
+	}
+	
+	@Override
+	public List<Data> getAllSharedData(int viewer) {
+		String query = "SELECT * FROM data WHERE d_id IN (SELECT d_id FROM access WHERE viewer_id = ?)";
+		Object[] args = new Object[] {viewer};
 		int[] argsType = new int[] {Types.INTEGER};
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
 		return result;
