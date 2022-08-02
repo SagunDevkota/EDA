@@ -8,6 +8,26 @@
     width: 60px;
 }
 
+.header{
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 7%;
+    border-bottom: var(--border);
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    height: 100px;
+}
+
+.header .navbar a{
+    margin: 0 1 rem;
+    font-size: 1.6rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.6rem;
+}
+
 body>div{
     display: flex;
     font-family: 'Roboto', sans-serif;
