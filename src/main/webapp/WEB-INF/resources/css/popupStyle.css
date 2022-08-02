@@ -67,7 +67,7 @@ body{
 .modal-box p{
   /* margin-bottom: 10px; */
   line-height: 20px;
-  color: grey;
+  color: rgb(19, 10, 10);
 }
 form input, form button{
   height: 50px;
