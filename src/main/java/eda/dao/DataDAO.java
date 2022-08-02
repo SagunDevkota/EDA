@@ -7,8 +7,9 @@ import eda.dto.Data;
 public interface DataDAO {
 	public Data getData(String hash,int owner);
 	public void saveData(Data data);
-	public boolean shareData(int id);
+	public void shareData(int viewerId,int dataId);
 	public boolean removeData(int id);
 	public List<Data> getAllData(int owner);
 	public Data getSharedData(int d_id,int viewer);
+	public List<Data> getAllSharedData(int viewer);
 }
