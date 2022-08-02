@@ -30,7 +30,9 @@ public class ShareReportService {
 		if(isOwner()) {
 			User user = userDAOImpl.findUserByUsername(email);
 			System.out.println(email+" "+reportId+" "+user.getId());
-			dataDAOImpl.shareData(user.getId(), reportId);
+			if(user!= null) {
+				dataDAOImpl.shareData(user.getId(), reportId);
+			}
 		}
 	}
 }
