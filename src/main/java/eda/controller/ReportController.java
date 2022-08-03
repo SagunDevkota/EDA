@@ -12,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
 import eda.dao.DataDAOImpl;
 import eda.dto.Data;
 import eda.report.report.ReportInitiator;
+import eda.service.ShareReportService;
 
 @Controller
 public class ReportController {
@@ -30,13 +32,31 @@ public class ReportController {
 	@Autowired
 	Gson gson;
 	
+	@Autowired
+	ShareReportService shareReportService;
+	
 	@RequestMapping("/reports")
 	public String getReports(HttpSession session,Model model) {
 		int id = (int) session.getAttribute("id");
 		System.out.println(id);
-		List<Data> allReports = dataDAOImpl.getAllData(id);
-		model.addAttribute("reports", allReports);
+		List<Data> allReportsOwned = dataDAOImpl.getAllData(id);
+		model.addAttribute("reportOwned", allReportsOwned);
+		List<Data> allReportsShared = dataDAOImpl.getAllSharedData(id);
+		model.addAttribute("reportShared", allReportsShared);
 		return "reports";
+	}
+	
+	@RequestMapping(value = "/popup",params = {"id"})
+	public String getPopup(@RequestParam("id") int reportId,Model model) {
+		model.addAttribute("id", reportId);
+		return "popup";
+	}
+	
+	@RequestMapping(value = "/processShare")
+	public String processShare(@RequestParam("id") int reportId,@RequestParam("email") String email,HttpSession session,Model model) {
+		shareReportService.initialize(reportId, email, (int)session.getAttribute("id"));
+		shareReportService.shareReport();
+		return "redirect:/dashboard";
 	}
 	
 	@RequestMapping(value = "/report" ,params = {"id"})
