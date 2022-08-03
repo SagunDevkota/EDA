@@ -351,7 +351,11 @@ body>div{
     background-color: #efefef33;
     padding: 15px;
     overflow: auto;
-    margin: auto;
+    margin-top:0px;
+    margin-bottom:0px;
+    margin-left:10vw;
+    margin-rigth:10vw;
+/* 	margin:auto; */
     border-radius: 4px;
 }
 
@@ -420,7 +424,9 @@ table>tbody>tr:nth-child(even) {
 table>tbody>tr:hover{
     filter: drop-shadow(0px 2px 6px #0002);
 }
-
+td{
+	height:50px;
+}
 
 
 

@@ -91,7 +91,7 @@ List<Data> reportSharedList= (List<Data>)request.getAttribute("reportShared");%>
 		</table>
 	</div>
 	
-	<div class="reports-table" style="margin-top: 0px;">
+	<div class="reports-table">
 		<h3>Shared</h3>
 		<table>
 		<thead>
