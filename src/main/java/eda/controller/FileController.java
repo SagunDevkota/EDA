@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.gson.Gson;
 
@@ -32,24 +34,29 @@ public class FileController {
 	@RequestMapping("/upload")
 	public String upload(Model model) {
 		model.addAttribute("uploadedFile", new UploadedFile());
-		return "temp-upload";
+		return "upload";
 	}
 
 	@RequestMapping(value = "/uploadFile",method = RequestMethod.POST)
-	public String uploadCSV(@RequestParam("file") CommonsMultipartFile file,HttpSession session,Model model) {
+	public RedirectView uploadCSV(@RequestParam("file") CommonsMultipartFile file,HttpSession session,RedirectAttributes redir) {
+		RedirectView redirectView = new RedirectView("/dashboard",true);
 		if(!file.getContentType().equals("text/csv")) {
-			return "redirect:upload?error=Invalid File Format";
+			redir.addFlashAttribute("error", "Invalid File Format");
+			redir.addFlashAttribute("success", false);
+			return redirectView;
 		}
 		FileUploadService fileUploadService = new FileUploadService(file,session,dataDAOImpl);
 		boolean response = false;
 		try {
 			response = fileUploadService.uploadFileToDatabase();
 		} catch (IOException e) {
-			model.addAttribute("error", e.getLocalizedMessage());
+			redir.addFlashAttribute("success", response);
+			redir.addFlashAttribute("error", e.getLocalizedMessage());
 		} catch(DuplicateFileException e) {
-			model.addAttribute("error", e.getLocalizedMessage());
+			redir.addFlashAttribute("success", response);
+			redir.addFlashAttribute("error", e.getLocalizedMessage());
 		}
-		model.addAttribute("response", response);
-		return "UploadResponse";
+		redir.addFlashAttribute("success", response);
+		return redirectView;
 	}
 }
