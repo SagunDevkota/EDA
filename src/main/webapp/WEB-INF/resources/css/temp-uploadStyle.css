@@ -25,9 +25,6 @@ body{
   justify-content: center;
   flex-direction: column;
 }
-/* .upload-area.active{
-  border: 2px solid #fff;
-} */
 .upload-area .icon{
   font-size: 100px;
   color: #fff;
@@ -36,6 +33,9 @@ body{
   font-size: 30px;
   font-weight: 500;
   color: #fff;
+}
+form{
+  text-align: center;
 }
 .upload-area button{
   padding: 10px 25px;
