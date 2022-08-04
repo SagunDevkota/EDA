@@ -11,8 +11,10 @@
   <div class="upload-area">
     <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
     <header>Upload CSV File</header>
-    <input type="file" class="file-select"><br>
-    <button class="btn-outline-success btn">Upload</button>
+    <form action="process-upload" class="form upload" id="upload" onsubmit="return validateUploadForm()">
+      <input type="file" class="file-select"><br>
+      <button class="btn-outline-success btn">Upload</button>
+    </form>
   </div>
   <script src="../resources/js/temp-uploadScript.js"></script>
 </body>
