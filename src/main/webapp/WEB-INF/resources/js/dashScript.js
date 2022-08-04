@@ -13,3 +13,10 @@ document.querySelector('#profile-btn').onclick = () =>{
     navbar.classList.remove('active');
     searchForm.classList.remove('active');
 }
+
+
+function togglePopup() {
+ document.getElementById("popup-1")
+  .classList.toggle("active");
+  toggle = false;
+}
