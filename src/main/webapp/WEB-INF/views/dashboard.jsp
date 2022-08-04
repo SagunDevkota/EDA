@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored = "false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,12 +18,43 @@
 	
 	</head>
 	<body>
-	
+		  <%
+		  String error = null;
+			Boolean responseStatus = null;
+			try{
+				responseStatus = ((Boolean)request.getAttribute("success"));
+			}catch(Exception e){
+				
+			}
+			  error = ((String)request.getAttribute("error"));
+			  String active = "";
+			  if(error != null || responseStatus != null){
+				  active = "active";
+			  }
+		  %>
+		  <h1><%=error %><%=responseStatus %></h1>
+		  <div class="popup <%=active %>" id="popup-1">
+		  <%if(responseStatus != null){
+			  if(responseStatus == false){ %>
+			   <div class="content" style="background: red;">
+			   <%}else{ %>
+			   <div class="content" style="background: green;">
+			   <span class="message">File Uploaded Successfully</span>
+			   <%} %>
+			   <%if(error != null){%>
+				   <span class="message"><%=error%></span>
+			   <%} else if(responseStatus == false){%>
+			     <span class="message">Invalid File Format</span>
+			     <%} %>
+			     <span class="close-btn" onclick="togglePopup()">×</span>
+			   </div>
+		   <%} %>
+		</div>
 		<!-- header starts  -->
 	
 		<header class="header">
 	
-			<a href="#" class="logo">
+			<a href="./" class="logo">
 				<div class="title">EDA</div>
 			</a>
 	

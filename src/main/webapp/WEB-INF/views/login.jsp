@@ -13,6 +13,37 @@
     
 </head>
 <body>
+<h1>
+	<%
+	String error = null;
+	Boolean responseStatus = null;
+	try{
+		responseStatus = ((Boolean)request.getAttribute("success"));
+	}catch(Exception e){
+		
+	}
+	  error = ((String)request.getAttribute("error"));
+	  String active = "";
+	  if(error != null || responseStatus != null){
+		  active = "active";
+	  }
+	%>
+	<div class="popup <%=active %>" id="popup-1">
+	<%if(responseStatus != null){ %>
+		  <%if(responseStatus == false){ %>
+		   <div class="content" style="background: red;">
+		   <%}else if(responseStatus == true){ %>
+		   <div class="content" style="background: green;">
+		   <span class="message">Account Created Successfully</span>
+		   <%}if(error != null){%>
+			   <span class="message"><%=error%></span>
+		   <%} else if(responseStatus == false){%>
+		     <span class="message">Account Creation Failed</span>
+		     <%} %>
+		     <span class="close-btn" onclick="togglePopup()">×</span>
+		   </div>
+		   <%} %>
+		</div>
   <div class="cont">
     <div>
       <!-- form ma action, method rakheko xaina.   -->
