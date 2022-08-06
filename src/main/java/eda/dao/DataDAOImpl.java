@@ -70,9 +70,9 @@ public class DataDAOImpl implements DataDAO {
 	
 	@Override
 	public List<Data> getAllSharedData(int viewer) {
-		String query = "SELECT * FROM data WHERE d_id IN (SELECT d_id FROM access WHERE viewer_id = ?)";
-		Object[] args = new Object[] {viewer};
-		int[] argsType = new int[] {Types.INTEGER};
+		String query = "SELECT * FROM data WHERE d_id IN (SELECT d_id FROM access WHERE viewer_id = ?) and owner_id != ?";
+		Object[] args = new Object[] {viewer,viewer};
+		int[] argsType = new int[] {Types.INTEGER,Types.INTEGER};
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
 		return result;
 	}
