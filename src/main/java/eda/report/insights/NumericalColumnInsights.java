@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class NumericalColumnInsights{
 	ArrayList<Double> row;
@@ -129,5 +131,23 @@ public class NumericalColumnInsights{
 		return statsData;
 	}
 
-
+	public HashMap<String,Integer> getHistogramData(){
+		HashMap<String, Integer> histData = new HashMap<>();
+		double factor = ((getMax()+(0.001*getMin()/100))-getMin())/9;
+		ArrayList<Double> nullRemovedRow = new ArrayList<>(row);
+		nullRemovedRow.replaceAll(t -> Objects.isNull(t) ? getMin()-1 : t);
+		int count = 0;
+		for(double i = getMin();count<10;i = i+factor) {
+			final double lower = i;
+			final double higher = i+factor;
+			List<Double> collect = nullRemovedRow.stream().collect(Collectors.groupingBy(v->(v>= lower && v<higher))).get(true);
+			if(collect != null) {
+				histData.put(""+higher, collect.size());
+			}else {
+				histData.put(""+higher, 0);
+			}
+			count++;
+		}
+		return histData;
+	}
 }
