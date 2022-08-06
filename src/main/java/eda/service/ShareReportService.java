@@ -26,13 +26,14 @@ public class ShareReportService {
 		Data sharedData = dataDAOImpl.getSharedData(reportId, ownerId);
 		return sharedData!=null?true:false;
 	}
-	public void shareReport() {
+	public boolean shareReport() {
 		if(isOwner()) {
 			User user = userDAOImpl.findUserByUsername(email);
-			System.out.println(email+" "+reportId+" "+user.getId());
 			if(user!= null) {
 				dataDAOImpl.shareData(user.getId(), reportId);
+				return true;
 			}
 		}
+		return false;
 	}
 }
