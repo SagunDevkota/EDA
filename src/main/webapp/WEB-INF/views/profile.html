@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../resources/css/profileStyle.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="./minidash.html"><img src="../resources/images/logo.jpg" alt="logo" class="logo"></a>
+        <nav class="navbar">
+            <a href="./minidash.html">HOME</a>
+            <a href="#about">ABOUT</a>
+            <a href="./temp-upload.html">UPLOAD</a>
+            <a href="./report.html">REPORT</a>
+            <a href="#">VIEW SHARED</a>
+            <a href="#contact">CONTACT</a>
+        </nav>
+    </header>        
+    <form action="process-logout" class="card" onsubmit="return handleLogout()">
+        <div class="fas fa-user" id="profile-icon"></div>
+        <h1>${name}</h1>
+        <p class="email">${email}</p>
+        <p>${contact}</p>
+        <div class="socials">
+            <a href="#"><i class="fab fa-facebook" id="social"></i></a> 
+            <a href="#"><i class="fab fa-linkedin"></i></a> 
+            <a href="#"><i class="fab fa-instagram"></i></a> 
+        </div>
+        <button class="logout btn">Logout</button>
+    </form>
+</body>
+</html>
