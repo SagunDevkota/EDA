@@ -5,40 +5,195 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Report</title>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Item', 'Occurrence'],
-            ['A (a)', 12],
-            ['B (b)', 9],
-            ['C (c)', 12],
-            ['D (d)', 22],
-            ['E (e)', 1],
-            ['F (f)', 36],
-            ['G (g)', 9],
-            ['H (h)', 30],
-            ['I (i)', 6],
-            ['J (j)', 2],
-            ['K (k)', 9],
-            ['L (l)', 2],
-            ['M (m)', 27],
-            ['N (n)', 3],
-            ]);
-
-            var options = {
-            title: 'Occurrence of items, count',
-            legend: { position: 'none' },
-            };
-
-            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
-        </script>
+        <link rel="stylesheet" href="../resources/css/reportStyle.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     </head>
   <body>
-    <div id="chart_div" style="width: 600px; height: 200px; position: relative; float: right;"></div>
+    <canvas id="myChart"></canvas>
+
+    <script>
+    var xValues = [0, 15, 30, 35, 40];
+    var yValues = [55, 49, 64, 34, 35];
+
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: "blue",
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+      }
+    });
+    </script>
+    <header class="header">
+      <a href="./minidash.html"><img src="../resources/images/logo.jpg" alt="logo" class="logo"></a>
+      <nav class="navbar">
+          <a href="./minidash.html">HOME</a>
+          <a href="#about">ABOUT</a>
+          <a href="./temp-upload.html">UPLOAD</a>
+          <a href="./report.html">REPORT</a>
+          <a href="#">VIEW SHARED</a>
+          <a href="#contact">CONTACT</a>    
+      </nav>
+  </header> 
+  <section class="overview">
+      <table class="overview-table">
+        <h2>OVERVIEW</h2>
+        <tr>
+          <th>Number of variables</th>
+          <td>9</td>
+        </tr>
+        <tr>
+          <th>Number of observations</th>
+          <td>9</td>
+        </tr>
+        <tr>
+          <th>Missing cells</th>
+          <td>9</td>
+        </tr>
+        <tr>
+          <th>Missing cells(%)</th>
+          <td>9</td>
+        </tr>
+        <tr>
+          <th>Duplicate rows</th>
+          <td>9</td>
+        </tr>
+        <tr>
+          <th>Duplicate rows(%)</th>
+          <td>9</td>
+        </tr>
+      </table>
+  </section>
+
+  <section class="variable-type">
+    <table class="overview-table">
+      <h2>Variable types</h2>
+      <tr>
+        <th>NUM</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>STRING</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>BOOLEAN</th>
+        <td>9</td>
+    </table>
+  </section>
+
+  <section class="variable">
+    <table class="overview-table">
+      <h2>VARIABLES</h2>
+      <tr>
+        <th>Distinct count</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Unique(%)</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Missing</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Missing(%)</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Mean</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Minimum</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Maximum</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Zeros</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Zeros(%)</th>
+        <td>9</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- <form action="toggle-details" onsubmit="toggleDetails()"> -->
+   
+    <button id="toggle-btn" onclick="toggleAction()">toggle details</button>
+  
+  <!-- </form> -->
+
+  <div id="target-div" style="display:none">
+  <section class="quantile-details">
+    <table class="overview-table">
+      <h2>Quantile statistics</h2>
+      <tr>
+        <th>Minimum</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Median</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Maximum</th>
+        <td>9</td>
+      </tr>
+    </table>
+  </section>
+  <section class="statistics-details">  
+    <table class="overview-table">  
+      <h2>Discriptive statistics</h2>
+      <tr>
+        <th>Standard deviation</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Cofficient of variation</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Mean</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Skewness</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Sum</th>
+        <td>9</td>
+      </tr>
+      <tr>
+        <th>Variance</th>
+        <td>9</td>
+      </tr>
+    </table>
+  </section>
+  </div>
+  
+
+  <script>
+    function toggleAction(){
+      var x = document.getElementById("target-div");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
   </body>
 </html>

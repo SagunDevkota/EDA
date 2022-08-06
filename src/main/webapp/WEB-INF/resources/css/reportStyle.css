@@ -1,0 +1,117 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    outline: none; border:none;
+    text-decoration: none;
+}
+
+html{
+    overflow-x: hidden;
+    scroll-padding-top: 9rem;
+    scroll-behavior: smooth;
+}
+
+.header{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:1.5rem 7%;
+    border-bottom: var(--border);
+    position: fixed;
+    top:0; left: 0; right: 0;
+    z-index: 1000;
+}
+
+.header .navbar a{
+    margin:0 1rem;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.header .navbar a:hover{
+    color: yellowgreen;
+    border-bottom: .1rem solid var(--main-color);
+    padding-bottom: .5rem;
+}
+
+.logo {
+    height: 60px;
+    width: 60px;
+}
+
+.overview {
+    position: relative;
+    margin-top: 180px;
+    margin-left: 30px;
+    border: 2px solid black;
+    max-width: 600px;
+}
+
+.overview-table {
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.8;
+    padding-left: 10px;
+    color:#eee;
+    color: black;
+}
+
+.overview-table td{
+    padding-left: 152px;
+}
+
+.variable-type {
+    margin-top: -305px;
+    /* display: inline-block; */
+    border: 2px solid black;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    float: right;
+}
+
+.variable {
+    position: relative;
+    margin-top: 20px;
+    margin-left: 30px;
+    border: 2px solid black;
+    max-width: 600px;
+}
+
+.variable td{
+    padding-left: 242px;
+}
+
+#myChart{
+    position: relative;
+    margin-top: 500px;
+    max-width: 350px; 
+    height: 200px; 
+    position: relative; 
+    float: right; 
+}
+
+#toggle-btn{
+    margin-left: 80%;
+    font-size: 1.2em;
+}
+
+.quantile-details{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 30px;
+    border: 2px solid black;
+    max-width: 600px;
+}
+
+.quantile-details td {
+    padding-left: 260px;
+}
+
+.statistics-details{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 30px;
+    border: 2px solid black;
+    max-width: 600px;
+}
