@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import eda.report.constants.*;
 
@@ -99,5 +101,23 @@ public class BooleanColumnInsights{
 			distinctSet.add(val);
 		}
 		distinct = (double)(distinctSet.size());
+	}
+	
+	
+	public HashMap<String,Integer> getHistogramData(){
+		HashMap<String, Integer> histData = new HashMap<>();
+		ArrayList<Boolean> nullRemovedRow = new ArrayList<>(row);
+		nullRemovedRow.removeIf(Objects::isNull);
+		boolean[] list = new boolean[] {true,false};
+		for(int i = 0;i<2;i++) {
+			final int c = i;
+			List<Boolean> collect = nullRemovedRow.stream().collect(Collectors.groupingBy(v->(v== list[c]))).get(true);
+			if(collect != null) {
+				histData.put(""+list[i], collect.size());
+			}else {
+				histData.put(""+list[i], 0);
+			}
+		}
+		return histData;
 	}
 }
