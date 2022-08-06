@@ -44,7 +44,7 @@
 			   <%if(error != null){%>
 				   <span class="message"><%=error%></span>
 			   <%} else if(responseStatus == false){%>
-			     <span class="message">Invalid File Format</span>
+			     <span class="message">Invalid Format</span>
 			     <%} %>
 			     <span class="close-btn" onclick="togglePopup()">×</span>
 			   </div>

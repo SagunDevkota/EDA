@@ -55,6 +55,7 @@ html{
     padding-left: 10px;
     color:#eee;
     color: black;
+    width:max-content;
 }
 
 .overview-table td{
@@ -75,7 +76,8 @@ html{
     margin-top: 20px;
     margin-left: 30px;
     border: 2px solid black;
-    max-width: 600px;
+    max-width: fit-content;
+    min-width: 40%;
 }
 
 .variable td{
@@ -99,9 +101,9 @@ html{
 .quantile-details{
     position: relative;
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 3vw;
+    margin-right: 3vw;
     border: 2px solid black;
-    max-width: 600px;
 }
 
 .quantile-details td {
@@ -111,7 +113,12 @@ html{
 .statistics-details{
     position: relative;
     margin-top: 20px;
-    margin-left: 30px;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    margin-bottom: 3vh;
     border: 2px solid black;
-    max-width: 600px;
+    max-width: max-content;
+}
+section{
+	border-radius: 0.8rem; 
 }

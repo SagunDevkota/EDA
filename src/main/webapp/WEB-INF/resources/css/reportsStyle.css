@@ -71,13 +71,6 @@ section{
 
 
 .header .navbar a{
-<<<<<<< HEAD
-    margin: 0 1 rem;
-    font-size: 1.0rem;
-    color: #fff;
-    text-decoration: none;
-    padding: 0.6rem;
-=======
     margin:0 1rem;
     font-size: 1.6rem;
     color:#fff;
@@ -134,10 +127,38 @@ section{
 
 .header .search-form label:hover{
     color:var(--main-color);
->>>>>>> d97ec8156004ba0eb52dc53ad98306d7b30064b2
 }
 
+.popup .content {
+ position: absolute;
+ bottom: 0%;
+ right : 0%;
+ transform: translate(-50%,-150%) scale(0);
+ width: auto;
+ height: auto;
+ z-index: 2;
+ text-align: center;
+ padding: 10px;
+ border-radius: 5px; 
+ z-index: 1;
+}
 
+.popup .close-btn {
+ cursor: pointer;
+ color: white;
+ font-size: 35px;
+ position: relative;
+ top: -14px;
+ }
+
+.popup.active .content {
+transition: all 300ms ease-in-out;
+transform: translate(-50%,-50%) scale(1);
+}
+.popup .message {
+ color: white;
+ position: relative;
+ }
 
 .home{
     min-height: 100vh;
@@ -353,8 +374,8 @@ body>div{
     overflow: auto;
     margin-top:0px;
     margin-bottom:0px;
-    margin-left:10vw;
-    margin-rigth:10vw;
+    margin-left:5vw;
+/*     margin-right:10vw; */
 /* 	margin:auto; */
     border-radius: 4px;
 }
