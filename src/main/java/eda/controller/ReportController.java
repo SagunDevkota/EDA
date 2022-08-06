@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.google.gson.Gson;
 
@@ -53,10 +55,12 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value = "/processShare")
-	public String processShare(@RequestParam("id") int reportId,@RequestParam("email") String email,HttpSession session,Model model) {
+	public RedirectView processShare(@RequestParam("id") int reportId,@RequestParam("email") String email,HttpSession session,RedirectAttributes redir) {
+		RedirectView redirectView = new RedirectView("/dashboard", true);
 		shareReportService.initialize(reportId, email, (int)session.getAttribute("id"));
-		shareReportService.shareReport();
-		return "redirect:/dashboard";
+		boolean shareReport = shareReportService.shareReport();
+		redir.addFlashAttribute("success", shareReport);
+		return redirectView;
 	}
 	
 	@RequestMapping(value = "/report" ,params = {"id"})
