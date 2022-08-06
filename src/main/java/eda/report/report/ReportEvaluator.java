@@ -42,24 +42,24 @@ public class ReportEvaluator {
 				columnMetadata.put("columnName", headers.get(i));
 				columnMetadata.put("columnMetadata", numericalColumnInsights.getColumnMetadata());
 				columnMetadata.put("numStats", numericalColumnInsights.getStatisticsData());
-				
+				columnMetadata.put("histData", numericalColumnInsights.getHistogramData());
 			}else if(dataType[i].equals(Constants.CATEGORICAL)) {
 				
 				CategoricalColumnInsights categoricalColumnInsights = new CategoricalColumnInsights(data.get(i));
-				List<Entry<String, Integer>> list = new ArrayList<>(categoricalColumnInsights.getFrequencyData().entrySet());
-		        list.sort(Entry.comparingByValue());
-		        ArrayList<Map.Entry<String,Integer>> frequencyList = new ArrayList<>();
-		        int size = list.size()-1;
-		        for(int iterator = size;iterator>=size-5;iterator--) {
-		        	frequencyList.add(list.get(iterator));
-		        	if(iterator == 0) {
-		        		break;
-		        	}
-		        }
+				HashMap<String, Integer> list = categoricalColumnInsights.getFrequencyData();
+//		        list.sort(Entry.comparingByValue());
+//		        ArrayList<Map.Entry<String,Integer>> frequencyList = new ArrayList<>();
+//		        int size = list.size()-1;
+//		        for(int iterator = size;iterator>=size-5;iterator--) {
+//		        	frequencyList.add(list.get(iterator));
+//		        	if(iterator == 0) {
+//		        		break;
+//		        	}
+//		        }
 				columnMetadata.put("columnType", Constants.CATEGORICAL);
 				columnMetadata.put("columnName", headers.get(i));
 				columnMetadata.put("columnMetadata", categoricalColumnInsights.getColumnMetadata());
-				columnMetadata.put("catFrequency", frequencyList);
+				columnMetadata.put("catFrequency", list);
 				
 			}else {
 				
@@ -68,7 +68,7 @@ public class ReportEvaluator {
 				columnMetadata.put("columnName", headers.get(i));
 				columnMetadata.put("columnMetadata", booleanColumnInsights.getColumnMetadata());
 				columnMetadata.put("boolFrequency", booleanColumnInsights.getFrequencyData());
-				
+				columnMetadata.put("histData", booleanColumnInsights.getHistogramData());
 			}
 			columnsReport.add(columnMetadata);
 		}

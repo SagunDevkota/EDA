@@ -2,8 +2,12 @@ package eda.report.report;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import eda.report.preprocessing.ReadCSV;
 
@@ -21,6 +25,11 @@ public class ReportInitiator {
 		List<String> headers = readCSV.getHeaders();
 		String[] dataType = readCSV.getDataType(data);
 		
+		List<String> al = Arrays.asList(dataType);
+		Map<String, Long> dataTypeCount = al.stream().collect(
+			    Collectors.groupingBy(Function.identity(), 
+			    	    Collectors.counting())); 
+		
 		ReportEvaluator reportEvaluator = new ReportEvaluator();
 		
 		HashMap<String, Object> entireReport = new HashMap<>();
@@ -31,6 +40,7 @@ public class ReportInitiator {
 		entireReport.put("dataSetReport", dataSetMetadata);
 		entireReport.put("columnReport", columnMetadata);
 		entireReport.put("correlationTable", correlationData);
+		entireReport.put("dataTypeCount", dataTypeCount);
 		return entireReport;
 	}
 }
