@@ -59,7 +59,25 @@ public class ReportController {
 		RedirectView redirectView = new RedirectView("/dashboard", true);
 		shareReportService.initialize(reportId, email, (int)session.getAttribute("id"));
 		boolean shareReport = shareReportService.shareReport();
+		if(shareReport) {
+			redir.addFlashAttribute("message", "Report Shared");
+		}else {
+			redir.addFlashAttribute("error", "Cannot Share Report");
+		}
 		redir.addFlashAttribute("success", shareReport);
+		return redirectView;
+	}
+	
+	@RequestMapping(value="/processDelete", params = {"id"})
+	public RedirectView processDelete(@RequestParam("id") int id,HttpSession session,RedirectAttributes redir) {
+		RedirectView redirectView = new RedirectView("/dashboard",true);
+		boolean removeData = dataDAOImpl.removeData(id,(int)session.getAttribute("id"));
+		if(removeData) {
+			redir.addFlashAttribute("message", "File Deleted Successfully");
+		}else {
+			redir.addFlashAttribute("error", "Could not delete file");
+		}
+		redir.addFlashAttribute("success", removeData);
 		return redirectView;
 	}
 	

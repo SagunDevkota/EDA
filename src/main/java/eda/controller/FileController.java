@@ -57,6 +57,7 @@ public class FileController {
 			redir.addFlashAttribute("error", e.getLocalizedMessage());
 		}
 		redir.addFlashAttribute("success", response);
+		redir.addFlashAttribute("message", "File Uploaded Successfully");
 		return redirectView;
 	}
 }
