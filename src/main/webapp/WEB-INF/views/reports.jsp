@@ -82,7 +82,7 @@ List<Data> reportSharedList= (List<Data>)request.getAttribute("reportShared");%>
 					<td>
 						<span class="action_btn">
 	                    <a href="./popup?id=<%=url%>">Share</a>
-	                    <a href="#">Delete</a>
+	                    <a href="./processDelete?id=<%=url%>">Delete</a>
                     </span>
 					</td>
 				</tr>
