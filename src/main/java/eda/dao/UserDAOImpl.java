@@ -28,4 +28,11 @@ public class UserDAOImpl implements UserDAO {
 		return users.size()>0?users.get(0):null;
 	}
 
+	public User findUserById(int id) {
+		String query = "SELECT * FROM Users WHERE id = ?";
+		Object[] args = new Object[] {id};
+		int[] argsType = new int[] {Types.INTEGER};
+		List<User> users = jdbcTemplate.query(query, args,argsType,new UserRowMapperImpl());
+		return users.size()>0?users.get(0):null;
+	}
 }
