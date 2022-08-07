@@ -31,7 +31,7 @@
 	String jsonString = (String)request.getAttribute("json"); 
 	JsonObject convertedObject = new Gson().fromJson(jsonString, JsonObject.class);
 	%>
-	
+	<%=convertedObject %>
 	<canvas id="myChart"></canvas>
 
     <script>
@@ -54,15 +54,14 @@
     </script>
     <header class="header">
     
-      <a href="./minidash.html"><img src="<c:url value="/resources/images/logo.jpg"/>" alt="logo" class="logo"></a>
+      <a href="./dashboard"><img src="<c:url value="/resources/images/logo.jpg"/>" alt="logo" class="logo"></a>
       <nav class="navbar">
-          <a href="./minidash.html">HOME</a>
-          <a href="#about">ABOUT</a>
-          <a href="./temp-upload.html">UPLOAD</a>
-          <a href="./report.html">REPORT</a>
-          <a href="#">VIEW SHARED</a>
-          <a href="#contact">CONTACT</a>    
-      </nav>
+            <a href="./dashboard">HOME</a>
+            <a href="./dashboard#about">ABOUT</a>
+            <a href="./upload">UPLOAD</a>
+            <a href="./reports">REPORT</a>
+            <a href="./dashboard#contact">CONTACT</a>
+        </nav>
   </header> 
   <section class="overview">
       <table class="overview-table">
