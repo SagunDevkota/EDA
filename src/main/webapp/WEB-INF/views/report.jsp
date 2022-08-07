@@ -31,7 +31,6 @@
 	String jsonString = (String)request.getAttribute("json"); 
 	JsonObject convertedObject = new Gson().fromJson(jsonString, JsonObject.class);
 	%>
-	<%=convertedObject %>
 	<canvas id="myChart"></canvas>
 
     <script>

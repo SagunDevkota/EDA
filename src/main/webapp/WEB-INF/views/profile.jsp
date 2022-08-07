@@ -24,7 +24,7 @@
             <a href="./reports">REPORT</a>
             <a href="./dashboard#contact">CONTACT</a>
         </nav>
-    </header>        
+    </header>       
     <form:form action="./logout" class="card" method="POST">
         <div class="fas fa-user" id="profile-icon"></div>
         <h1>${user.getFullName()}</h1>
@@ -34,6 +34,7 @@
             <a href="#"><i class="fab fa-linkedin"></i></a> 
             <a href="#"><i class="fab fa-instagram"></i></a> 
         </div>
+        
 			<input type="submit" value="Logout" class="logout btn">
 		</form:form>
 </body>

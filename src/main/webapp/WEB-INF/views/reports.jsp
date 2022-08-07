@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,10 @@
 		        </div>
 		        <div class="profile-item">
 		            <div class="content">
-		               <h3><a href="./logout">Sign out</a></h3>
+		               <form:form action="./logout">
+		               		<button>Logout</button>
+		               </form:form>
+<!-- 		               <h3><a href="#">Sign out</a></h3> -->
 		            </div>
 		        </div>
 		    </div>
