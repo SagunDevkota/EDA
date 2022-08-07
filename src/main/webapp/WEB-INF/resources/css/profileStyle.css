@@ -30,7 +30,7 @@ html{
   font-size: 18px;
 }
 
-button {
+input {
   border: none;
   outline: 0;
   display: inline-block;
