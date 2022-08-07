@@ -17,18 +17,14 @@
 <body>
 	<header class="header">
 	
-			<a href="./dashboard" class="logo">
-				<div class="title">EDA</div>
-			</a>
-	
-			<nav class="navbar">
-				<a href="#home">HOME</a> <a href="#about">ABOUT</a> 
-				<a href="./upload">UPLOAD</a>
-				<a href="./reports">REPORT</a> 
-				<a href="./sharedwithme">VIEW SHARED</a> 
-				<a href="#contact">CONTACT</a>
-	
-			</nav>
+			<a href="./dashboard"><img src="<c:url value="/resources/images/logo.jpg"/>" alt="logo" class="logo"></a>
+      <nav class="navbar">
+            <a href="./dashboard">HOME</a>
+            <a href="./dashboard#about">ABOUT</a>
+            <a href="./upload">UPLOAD</a>
+            <a href="./reports">REPORT</a>
+            <a href="./dashboard#contact">CONTACT</a>
+        </nav>
 	
 			<div class="icons">
 				<div class="fas fa-search" id="search-btn"></div>
@@ -44,12 +40,12 @@
 			<div class="profile-items-container">
 		        <div class="profile-item">
 		            <div class="content">
-		                <h3><a href="#">option A</a></h3>
+		                <h3><a href="./profile">Profile</a></h3>
 		            </div>
 		        </div>
 		        <div class="profile-item">
 		            <div class="content">
-		               <h3><a href="#">option B</a></h3>
+		               <h3><a href="./logout">Sign out</a></h3>
 		            </div>
 		        </div>
 		    </div>
