@@ -34,9 +34,15 @@ public class DataDAOImpl implements DataDAO {
 	}
 
 	@Override
-	public boolean removeData(int id) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removeData(int id,int ownerId) {
+		boolean success = true;
+		String query = "DELETE FROM data WHERE d_id = ? and owner_id = ?";
+		try {
+		jdbcTemplate.update(query,id,ownerId);
+		}catch (Exception e) {
+			success = false;
+		}
+		return success;
 	}
 
 	@Override
