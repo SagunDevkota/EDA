@@ -62,7 +62,6 @@
 				<a href="#home">HOME</a> <a href="#about">ABOUT</a> 
 				<a href="./upload">UPLOAD</a>
 				<a href="./reports">REPORT</a> 
-				<a href="./sharedwithme">VIEW SHARED</a> 
 				<a href="#contact">CONTACT</a>
 	
 			</nav>
@@ -81,12 +80,12 @@
 			<div class="profile-items-container">
 		        <div class="profile-item">
 		            <div class="content">
-		                <h3><a href="#">option A</a></h3>
+		                <h3><a href="./profile">Profile</a></h3>
 		            </div>
 		        </div>
 		        <div class="profile-item">
 		            <div class="content">
-		               <h3><a href="#">option B</a></h3>
+		               <h3><a href="#">Sign out</a></h3>
 		            </div>
 		        </div>
 		    </div>
