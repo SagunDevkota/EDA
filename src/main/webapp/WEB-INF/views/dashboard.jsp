@@ -27,26 +27,23 @@
 			}catch(Exception e){
 				
 			}
+			String message = (String)request.getAttribute("message");
 			  error = ((String)request.getAttribute("error"));
 			  String active = "";
-			  if(error != null || responseStatus != null){
+			  if(error != null || message != null){
 				  active = "active";
 			  }
 		  %>
 		  <h1><%=error %><%=responseStatus %></h1>
 		  <div class="popup <%=active %>" id="popup-1">
 		  <%if(responseStatus != null){
-			  if(responseStatus == false){ %>
+			  if(error != null){ %>
 			   <div class="content" style="background: red;">
-			   <%}else{ %>
+			   <span class="message"><%=error%></span>
+			   <%}else if(message != null){ %>
 			   <div class="content" style="background: green;">
-			   <span class="message">File Uploaded Successfully</span>
+			   <span class="message"><%=message %></span>
 			   <%} %>
-			   <%if(error != null){%>
-				   <span class="message"><%=error%></span>
-			   <%} else if(responseStatus == false){%>
-			     <span class="message">Invalid Format</span>
-			     <%} %>
 			     <span class="close-btn" onclick="togglePopup()">×</span>
 			   </div>
 		   <%} %>
@@ -155,7 +152,7 @@
 				<div class="mapouter">
 					<div class="gmap_canvas">
 						<iframe width="600" height="500" id="gmap_canvas"
-							src="https://maps.google.com/maps?q=pokhara%20hemja&t=&z=13&ie=UTF8&iwloc=&output=embed"
+							src="https://maps.google.com/maps?q=pokhara%20lamachour&t=&z=13&ie=UTF8&iwloc=&output=embed"
 							frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 						<a href="https://www.whatismyip-address.com/divi-discount/">divi
 							discount</a><br>
