@@ -1,5 +1,7 @@
 package eda.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -7,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -78,5 +81,21 @@ public class AppConfig {
 	@Bean
 	public Gson gson() {
 		return new GsonBuilder().setPrettyPrinting().create();
+	}
+	
+	@Bean
+	public JavaMailSenderImpl javaMailSenderImpl() {
+		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+		javaMailSender.setHost("smtp.gmail.com");
+		javaMailSender.setUsername(AccountConfiguration.getEmail());
+		javaMailSender.setPassword(AccountConfiguration.getPassword());
+		javaMailSender.setPort(587);
+		Properties mailProps = new Properties();
+		mailProps.put("mail.smtp.starttls.enable", "true");
+		mailProps.put("mail.smtp.starttls.required", "true");
+		mailProps.put("mail.smtp.auth", "true");
+		mailProps.put("mail.smtp.ssl.trust","smtp.gmail.com");
+		javaMailSender.setJavaMailProperties(mailProps);
+		return javaMailSender;
 	}
 }
