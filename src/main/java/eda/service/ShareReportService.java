@@ -1,5 +1,7 @@
 package eda.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +37,13 @@ public class ShareReportService {
 			}
 		}
 		return false;
+	}
+	
+	public void updateAccess() {
+		dataDAOImpl.updateAccess();
+	}
+	
+	public Timestamp getAccessTime(int ownerId,int reportId) {
+		return dataDAOImpl.getAccessTime(reportId, ownerId);
 	}
 }

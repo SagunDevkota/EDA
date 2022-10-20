@@ -1,5 +1,6 @@
 package eda.dao;
 
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.List;
 
@@ -81,6 +82,23 @@ public class DataDAOImpl implements DataDAO {
 		int[] argsType = new int[] {Types.INTEGER,Types.INTEGER};
 		List<Data> result = jdbcTemplate.query(query, args,argsType,new DataRowMapperImpl());
 		return result;
+	}
+
+	@Override
+	public void updateAccess() {
+		String query = "UPDATE access SET last_accessed_at = ?";
+		int update = jdbcTemplate.update(query,new Timestamp(System.currentTimeMillis()));
+		System.out.println(update);
+	}
+
+	@Override
+	public Timestamp getAccessTime(int data,int viewer) {
+		String query = "SELECT last_accessed_at from access WHERE d_id = ? and viewer_id = ?";
+		Object[] args = new Object[] {data,viewer};
+		int[] argsType = new int[] {Types.INTEGER,Types.INTEGER};
+		List<Timestamp> result = jdbcTemplate.query(query, args,argsType,new AccessRowMapper());
+		System.out.println(result+" "+data+" "+viewer);
+		return result.size()>0?result.get(0):null;
 	}
 	
 }

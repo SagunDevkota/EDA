@@ -66,6 +66,7 @@ List<Data> reportSharedList= (List<Data>)request.getAttribute("reportShared");%>
 				<th>File Name</th>
 				<th>File Size</th>
 				<th>Created At</th>
+				<th>Accessed At</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -74,11 +75,13 @@ List<Data> reportSharedList= (List<Data>)request.getAttribute("reportShared");%>
 					<%String fileName = d.getFileName();
 						float size = (d.getFileSize()/(float)1024);
 						Timestamp time = d.getCreatedTime();
-						int url = d.getId();%>
+						int url = d.getId();
+						Timestamp accessed = d.getAccessedTime();%>
 					<td><a href="./report?id=<%=url %>" target="_blank"><%=fileName %></a></td>
 					<% %>
 					<td><%=size %> KB</td>
 					<td><%=time %></td>
+					<td><%=accessed%></td>
 					<td>
 						<span class="action_btn">
 	                    <a href="./popup?id=<%=url%>">Share</a>

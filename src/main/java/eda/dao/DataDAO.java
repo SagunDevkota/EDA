@@ -1,5 +1,6 @@
 package eda.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import eda.dto.Data;
@@ -12,4 +13,6 @@ public interface DataDAO {
 	public List<Data> getAllData(int owner);
 	public Data getSharedData(int d_id,int viewer);
 	public List<Data> getAllSharedData(int viewer);
+	public void updateAccess();
+	public Timestamp getAccessTime(int data,int viewer);
 }

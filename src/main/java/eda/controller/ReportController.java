@@ -42,6 +42,9 @@ public class ReportController {
 		int id = (int) session.getAttribute("id");
 		System.out.println(id);
 		List<Data> allReportsOwned = dataDAOImpl.getAllData(id);
+		for(Data report:allReportsOwned) {
+			report.setAccessedTime(shareReportService.getAccessTime(id,report.getId()));
+		}
 		model.addAttribute("reportOwned", allReportsOwned);
 		List<Data> allReportsShared = dataDAOImpl.getAllSharedData(id);
 		model.addAttribute("reportShared", allReportsShared);
@@ -90,6 +93,7 @@ public class ReportController {
 			System.out.println(shared);
 			if((shared) != null) {
 				report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+shared.getHash()+".csv");
+				shareReportService.updateAccess();
 			}else {
 				model.addAttribute("error", "You are not authorized");
 			}

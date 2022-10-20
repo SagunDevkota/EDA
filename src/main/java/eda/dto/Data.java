@@ -9,6 +9,7 @@ public class Data {
 	int ownerId;
 	long fileSize;
 	Timestamp createdTime;
+	Timestamp accessedTime;
 	String hash;
 	public int getId() {
 		return id;
@@ -52,9 +53,18 @@ public class Data {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
+	public Timestamp getAccessedTime() {
+		return accessedTime;
+	}
+	public void setAccessedTime(Timestamp accessedTime) {
+		this.accessedTime = accessedTime;
+	}
 	@Override
 	public String toString() {
 		return "Data [id=" + id + ", fileName=" + fileName + ", fileUrl=" + fileUrl + ", ownerId=" + ownerId
-				+ ", fileSize=" + fileSize + ", createdTime=" + createdTime + ", hash=" + hash + "]";
+				+ ", fileSize=" + fileSize + ", createdTime=" + createdTime + ", accessedTime=" + accessedTime
+				+ ", hash=" + hash + "]";
 	}
+	
+	
 }
