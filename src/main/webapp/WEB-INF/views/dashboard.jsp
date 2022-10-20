@@ -203,7 +203,7 @@
 						<span class="fas fa-envelope"></span>
 						<textarea rows="5"
 							style="width: 100%; background: transparent; color: white;"
-							placeholder="Message"></textarea>
+							placeholder="Message" name="message"></textarea>
 					</div>
 					<input type="submit" value="contact now" class="btn" id="btn-submit-contact">
 				</form:form>
