@@ -252,7 +252,9 @@
       <%}%>
   </section>
 <%} %>
-
+	<pre>
+		<%=convertedObject.get("correlationTable")%>
+	</pre>
 
   <script>
     function toggleAction(index){
