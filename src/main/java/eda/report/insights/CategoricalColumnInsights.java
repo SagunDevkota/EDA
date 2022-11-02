@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import eda.report.preprocessing.ReadCSV;
+
 /**
  * 
- * @author Sagun Devkota
  * Provides insights for categorical type of column.
  */
 public class CategoricalColumnInsights {
@@ -19,7 +20,7 @@ public class CategoricalColumnInsights {
 	/**
 	 * 
 	 * @param row Column of dataset(Row of transposed dataSet)
-	 * Note: for transposed logic visit ReadCSV from preprocessing package.
+	 * @see ReadCSV
 	 * initiates dataAnalyzer()
 	 */
 	public CategoricalColumnInsights(List<String> row) {
@@ -28,7 +29,7 @@ public class CategoricalColumnInsights {
 	}
 	
 	/**
-	 * @return: get distinct count elements.
+	 * @return get distinct count elements.
 	 * Used by getColumnMedata()
 	 */
 	private double getDistinct() {
@@ -37,7 +38,7 @@ public class CategoricalColumnInsights {
 
 	
 	/**
-	 * @return: get missing data count.
+	 * @return get missing data count.
 	 * Used by getColumnMedata()
 	 */
 	private double getMissing() {
@@ -47,7 +48,7 @@ public class CategoricalColumnInsights {
 	
 	/**
 	 * 
-	 * @return: Returns HashMap with frequency of each occurrence of every data.
+	 * @return Returns HashMap with frequency of each occurrence of every data.
 	 */
 	public HashMap<String, Integer> getFrequencyData(){
 		HashMap<String,Integer> frequency = new HashMap<>();
@@ -75,7 +76,7 @@ public class CategoricalColumnInsights {
 	}
 	
 	/**
-	 * @return: Returns HashMap with count of missing and distinct.
+	 * @return Returns HashMap with count of missing and distinct.
 	 */
 	public HashMap<String, Double> getColumnMetadata() {
 		HashMap<String,Double> map = new HashMap<>();

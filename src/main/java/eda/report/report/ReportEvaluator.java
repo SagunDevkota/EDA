@@ -14,14 +14,15 @@ import eda.report.preprocessing.ReadCSV;
 
 /**
  * 
- * @author Sagun Devkota
  * Produces report for Report Initiator
  * @see ReportInitiator
  *
  */
 public class ReportEvaluator {
 	/**
-	 * 
+	 * @see NumericalColumnInsights
+	 * @see CategoricalColumnInsights
+	 * @see BooleanColumnInsights
 	 * @param data contents of every column
 	 * @param headers title of columns
 	 * @param dataType data type of columns
@@ -90,7 +91,14 @@ public class ReportEvaluator {
 		return dataSet;
 	}
 
-
+	/**
+	 * 
+	 * @param data contents of every column
+	 * @param headers title of columns
+	 * @param dataType data type of columns
+	 * @param columnMetadata insights of columns
+	 * @return returns correlation of every column
+	 */
 	@SuppressWarnings("unchecked")
 	public HashMap<String, HashMap<String, Double>> getCorrelationData(ArrayList<List<String>> data,
 			List<String> headers, String[] dataType,List<HashMap<String, Object>> columnMetadata) {

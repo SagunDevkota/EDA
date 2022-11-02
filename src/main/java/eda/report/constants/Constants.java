@@ -2,7 +2,6 @@ package eda.report.constants;
 
 /**
  * 
- * @author Sagun Devkota
  * Column types and respective identifier for report generation.
  *
  */

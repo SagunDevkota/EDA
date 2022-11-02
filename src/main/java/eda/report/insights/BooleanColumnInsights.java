@@ -8,12 +8,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import eda.report.constants.*;
+import eda.report.preprocessing.ReadCSV;
 
 /**
  * 
- * @author Sagun Devkota
  * Provides insights for boolean type of column.
- * Note: true/false and 1/0 are identified as boolean columns.
+ * <br>Note : true/false and 1/0 are identified as boolean columns.
  */
 public class BooleanColumnInsights{
 	ArrayList<Boolean> row;
@@ -22,8 +22,7 @@ public class BooleanColumnInsights{
 	/**
 	 * 
 	 * @param row Column of dataset(Row of transposed dataSet)
-	 * Note: for transposed logic visit ReadCSV from preprocessing package.
-	 * @see preprocessing.ReadCSV
+	 * @see ReadCSV
 	 * Converts values of column from String(Read as String from file) to boolean.
 	 */
 	public BooleanColumnInsights(List<String> row) {
@@ -43,7 +42,7 @@ public class BooleanColumnInsights{
 	}
 	
 	/**
-	 * @return: get distinct count elements.
+	 * @return get distinct count elements.
 	 * Used by getColumnMedata()
 	 */
 	private double getDistinct() {
@@ -51,7 +50,7 @@ public class BooleanColumnInsights{
 	}
 
 	/**
-	 * @return: get missing data count.
+	 * @return get missing data count.
 	 * Used by getColumnMedata()
 	 */
 	private double getMissing() {
@@ -59,7 +58,8 @@ public class BooleanColumnInsights{
 	}
 
 	/**
-	 * @return: Returns HashMap with count of missing and distinct.
+	 * 
+	 * @return Returns HashMap with count of missing and distinct.
 	 */
 	public HashMap<String, Double> getColumnMetadata() {
 		HashMap<String,Double> map = new HashMap<>();
@@ -70,7 +70,7 @@ public class BooleanColumnInsights{
 
 	/**
 	 * 
-	 * @return: Returns HashMap with count of true and false.
+	 * @return Returns HashMap with count of true and false.
 	 */
 	public HashMap<String, Integer> getFrequencyData(){
 		HashMap<String,Integer> frequency = new HashMap<>();
@@ -88,7 +88,7 @@ public class BooleanColumnInsights{
 	}
 	
 	/**
-	 * Calculates distinct,missing.
+	 * Calculate distinct,missing.
 	 */
 	private void dataAnalyzer() {
 		HashSet<Boolean> distinctSet = new HashSet<>();
@@ -103,7 +103,10 @@ public class BooleanColumnInsights{
 		distinct = (double)(distinctSet.size());
 	}
 	
-	
+	/**
+	 * 
+	 * @return returns range and frequency of occurrence of data for histogram
+	 */
 	public HashMap<String,Integer> getHistogramData(){
 		HashMap<String, Integer> histData = new HashMap<>();
 		ArrayList<Boolean> nullRemovedRow = new ArrayList<>(row);

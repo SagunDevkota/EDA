@@ -11,13 +11,17 @@ import java.util.stream.Collectors;
 
 import eda.report.preprocessing.ReadCSV;
 
+/**
+ * 
+ * ReportInitiator starts the analysis of dataset
+ */
 public class ReportInitiator {
 	
 	/**
 	 * 
 	 * @param fileName Name of file to be read
 	 * @return	Returns entire report of DataSet
-	 * @throws IOException
+	 * @throws IOException throws IOException
 	 */	
 	public HashMap<String, Object> getReport(String fileName) throws IOException{
 		ReadCSV readCSV = new ReadCSV(fileName);

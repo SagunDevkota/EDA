@@ -13,10 +13,22 @@ import com.opencsv.exceptions.CsvValidationException;
 
 import eda.report.constants.Constants;
 
+/**
+ * 
+ * ReadCSV is used to parse CSV file and create a Transpose in parseable format
+ *
+ */
+
 public class ReadCSV {
 	List<String> headers;
 	ArrayList<List<String>> data;
 	int missing = 0;
+	
+	/**
+	 * 
+	 * @param path path to CSV file
+	 * @throws IOException throws IOExcepion
+	 */
 	public ReadCSV(String path) throws IOException {
 		data = new ArrayList<>();
 		CSVReader br = new CSVReader(new FileReader(path));
@@ -25,16 +37,19 @@ public class ReadCSV {
 	}
 	
 
-	/**
-	 * 
-	 * @param br BufferedReader object of file read.
-	 * @return List of headers in given CSV File;
+	/*
 	 * A,B,C,D
 	 * 1,1,0.2,0.3
 	 * 
 	 * Here this method returns [A,B,C,D]
 	 * as A,B,C,D they is first line returned by br.readLine()
 	 * .split(",") methods creates array by splitting on ","
+	 */
+	
+	/**
+	 * 
+	 * @param br CSVReader object
+	 * @return returns list of headers in given CSV File
 	 */
 	private List<String> getHeaders(CSVReader br) {
 		try {
@@ -46,15 +61,16 @@ public class ReadCSV {
 		return null;
 	}
 	
-	/**
-	 * 
-	 * @param br BufferedReader object of file read.
+	/*
 	 * A,B,C,D (already read by getHeaders
 	 * 1,1,0.2,0.3
 	 * 10,10,0.22,0.31
+	 */
+	/**
 	 * 
-	 * adds data to data arrayList by parsing all data except headers
-	 * @throws CsvValidationException 
+	 * @param br CSVReader object
+	 * 
+	 * Adds data to arraylist defined by constructor
 	 */
 	private void stringToCSVFormat(CSVReader br){
 		try {
@@ -74,19 +90,8 @@ public class ReadCSV {
 	 * @param data data parsed by stringToCSVFormat
 	 * @param headers headings of CSV File
 	 * @return transpose of data matrix
-	 * Note: transpose of data matrix is now stored in data
-	 * Before:
-	 * 
-	 * A,B,C,D
-	 * 1,1,0.2,0.3
-	 * 10,10,0.22,0.31
-	 * 
-	 * After:
-	 * 
-	 * A->	[[1,10],
-	 * B->	[1,10],
-	 * C->	[0.2,0.22],
-	 * D->	[0.3,0.31]]
+	 * transpose of data matrix is now stored in data
+
 	 */
 	private ArrayList<List<String>> transposeArray(ArrayList<List<String>> data,List<String> headers) {
 		String[][] dataInverted = new String[headers.size()][data.size()];
@@ -106,10 +111,8 @@ public class ReadCSV {
 	}
 	
 	
-	/**
+	/*
 	 * 
-	 * @param data data parsed by stringToCSVFormat
-	 * @return array of dataType of every column
 	 * 
 	 * DataTypes can be Numerical,Categorical,Boolean
 	 * 
@@ -129,6 +132,11 @@ public class ReadCSV {
 	 * 
 	 * It should not be Numeric/Categorical because a column is Numeric/Categorical if data of previous column of same row(ed) is
 	 * not "0/1" or if it is not "true/false"
+	 */
+	/**
+	 * 
+	 * @param data data parsed by stringToCSVFormat
+	 * @return array of dataType of every column
 	 */
 	public String[] getDataType(ArrayList<List<String>> data) {
 		String[] type = new String[data.size()];
@@ -181,11 +189,18 @@ public class ReadCSV {
 		return headers;
 	}
 	
+	/**
+	 * 
+	 * @return number of missing data
+	 */
 	public int getMissing() {
 		return missing;
 		
 	}
-	
+	/**
+	 * 
+	 * @return number of records
+	 */
 	public int getRecords() {
 		return data.get(0).size();
 	}

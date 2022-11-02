@@ -5,13 +5,18 @@ import java.util.Collections;
 import java.util.List;
 /**
  * 
- * @author Sagun Devkota
  * Gives Statistical Analysis of data
  *
  */
 public class Statistics {
 	ArrayList<Double> row;
 	double mean,notNullItems;
+	/**
+	 * @see NumericalColumnInsights
+	 * @param row Column of dataset(Row of transposed dataset)
+	 * @param mean mean of row
+	 * @param notNullItems number of not null items
+	 */
 	public Statistics(ArrayList<Double> row, double mean, double notNullItems) {
 		this.row = row;
 		this.mean = mean;
@@ -22,7 +27,7 @@ public class Statistics {
 	 * 
 	 * @return Standard deviation of given list
 	 * 
-	 * Formula : sqrt((x-myu)^2 / n)
+	 * <br>Formula : sqrt((x-myu)^2 / n)
 	 * 
 	 */
 	public double getStandardDeviation() {
@@ -39,7 +44,7 @@ public class Statistics {
 	/**
 	 * 
 	 * @return Coefficient Of Variation of given list
-	 * Formula : StandardDeviation/Mean.
+	 * <br>Formula : StandardDeviation/Mean.
 	 */
 	public double getCoefficientOfVariation() {
 		return (getStandardDeviation()/mean);
@@ -49,7 +54,7 @@ public class Statistics {
 	/**
 	 * 
 	 * @return Variance of given list
-	 * Formula : StandardDeviation^2.
+	 * <br>Formula : StandardDeviation^2.
 	 */
 	public double getVariance() {
 		return Math.pow(getStandardDeviation(), 2);
@@ -58,8 +63,9 @@ public class Statistics {
 	/**
 	 * 
 	 * @return Median of given list
-	 * Formula : [(n/2)th term + {(n/2)+1}th term]/2 if n is even
-	 * {(n+1)/2}th term if n is odd
+	 * <br>Formula : <br>
+	 * if n is even : [(n/2)th term + {(n/2)+1}th term]/2 <br>
+	 * else : {(n+1)/2}th term 
 	 */
 	public double getMedian() {
 		List<Double> sortedRow = new ArrayList<>();
@@ -80,9 +86,9 @@ public class Statistics {
 	}
 	
 	/**
-	 * 
+	 * @param mean of row
 	 * @return Variance of given list
-	 * Formula : sum(Ni (Xi – X)^3 / (N-1) * sigma^3)
+	 * <br>Formula : sum((Xi – X)^3 / (N-1) * sigma^3)
 	 */
 	public double getSkewness(double mean) {
 		double partialSum = 0;
