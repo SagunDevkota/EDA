@@ -7,21 +7,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import eda.report.preprocessing.ReadCSV;
+
+/**
+ * 
+ * Provides insights for numerical columns
+ */
 public class NumericalColumnInsights{
 	ArrayList<Double> row;
 	double min,max,mean,zeros,sum,missing,distinct;
 	
 	/**
 	 * 
-	 * @param row
-	 * Row data is needed in every calculation so it is taken in constructor.
-	 * here row is
-	 *  A->	[[1,10],
-	 * B->	[1,10],
-	 * C->	[0.2,0.22],
-	 * D->	[0.3,0.31]]
-	 * 
-	 * First row [1,10] second [1,10] third [0.2,0.22] and so on
+	 * @param row Column of dataset(Row of transposed dataSet)
+	 * @see ReadCSV
+	 * initiates dataAnalyzer()
 	 */
 	public NumericalColumnInsights(List<String> row) {
 		this.row = new ArrayList<Double>();
@@ -35,37 +35,55 @@ public class NumericalColumnInsights{
 		dataAnalyzer();
 	}
 
+	/**
+	 * 
+	 * @return returns the maximum value
+	 */
 	private double getMax() {
 		return max;
 	}
 
-
+	/**
+	 * 
+	 * @return returns the minimum value
+	 */
 	private double getMin() {
 		return min;
 	}
 
-
+	/**
+	 * 
+	 * @return returns the mean value
+	 */
 	private double getMean() {
 		return mean;
 	}
 
-
+	/**
+	 * 
+	 * @return returns number of 0's in row
+	 */
 	private double getZeros() {
 		return zeros;
 	}
 
-
+	/**
+	 * 
+	 * @return returns number of missing data
+	 */
 	private double getMissing() {
 		return missing;
 	}
 
-
+	/**
+	 * 
+	 * @return returns number of distinct elements
+	 */
 	private double getDistinct() {
 		return distinct;
 	}
 	
 	/**
-	 * Called by external interface
 	 * @return hash map of generalised mathematical data
 	 */
 	public HashMap<String, Double> getColumnMetadata() {
@@ -80,7 +98,7 @@ public class NumericalColumnInsights{
 	}
 	
 	/**
-	 * Called internally by constructor of NumericalColumnInsights
+	 * Called internally by constructor of NumericalColumnInsights<br>
 	 * Calculates min,max,mean,sum,zeros,missing,distinct
 	 */
 	private void dataAnalyzer() {
@@ -130,7 +148,11 @@ public class NumericalColumnInsights{
 		statsData.put("Skewness", stats.getSkewness(mean));
 		return statsData;
 	}
-
+	
+	/**
+	 * 
+	 * @return returns range and occurrence of data for histogram
+	 */
 	public HashMap<String,Integer> getHistogramData(){
 		HashMap<String, Integer> histData = new HashMap<>();
 		double factor = ((getMax()+(0.001*getMin()/100))-getMin())/9;
