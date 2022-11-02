@@ -255,7 +255,9 @@
 	<pre>
 		<%=convertedObject.get("correlationTable")%>
 	</pre>
-
+	<pre>
+		<%=convertedObject.get("columnReport").getAsJsonArray().get(0).getAsJsonObject().get("histData") %>
+	</pre>
   <script>
     function toggleAction(index){
       var x = document.getElementsByClassName("target-div")[index];
