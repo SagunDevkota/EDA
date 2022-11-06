@@ -1,5 +1,6 @@
 package eda.report.report;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +106,7 @@ public class ReportEvaluator {
 		HashMap<String, HashMap<String, Double>> correlationTable = new HashMap<>();
 		ArrayList<Integer> numericData = getOnlyNumericColumn(data,dataType);
 		System.out.println(numericData.size()+" "+data.get(numericData.get(0)).size());
+		DecimalFormat format = new DecimalFormat("#.####");
 		for(int i = 0;i<numericData.size();i++) {
 			double meanX = ((HashMap<String, Double>) columnMetadata.get(numericData.get(i)).get("columnMetadata")).get("Mean");
 //			System.out.println(meanX+" "+headers.get(numericData.get(i)));
@@ -125,7 +127,7 @@ public class ReportEvaluator {
 				}
 				double varX = ((HashMap<String, Double>) columnMetadata.get(numericData.get(i)).get("numStats")).get("Standard Deviation");
 				double varY = ((HashMap<String, Double>) columnMetadata.get(numericData.get(j)).get("numStats")).get("Standard Deviation");
-				map.put(headers.get(numericData.get(j)), (partialSum/countObservation)/(varX*varY));
+				map.put(headers.get(numericData.get(j)),Double.parseDouble(format.format((partialSum/countObservation)/(varX*varY))));
 //				System.out.println((partialSum/countObservation)/(varX*varY)+" "+headers.get(numericData.get(i))+" "+headers.get(numericData.get(j))+" "+meanX+" "+meanY);
 			}
 			correlationTable.put(headers.get(numericData.get(i)), map);

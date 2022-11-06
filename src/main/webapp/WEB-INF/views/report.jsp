@@ -1,3 +1,4 @@
+<%@page import="java.util.Set"%>
 <%@page import="com.google.gson.JsonElement"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="eda.report.constants.Constants"%>
@@ -8,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
@@ -252,12 +254,37 @@
       <%}%>
   </section>
 <%} %>
-	<pre>
-		<%=convertedObject.get("correlationTable")%>
-	</pre>
-	<pre>
-		<%=convertedObject.get("columnReport").getAsJsonArray().get(0).getAsJsonObject().get("histData") %>
-	</pre>
+	<%
+	JsonObject corrJson = convertedObject.get("correlationTable").getAsJsonObject();
+	Set<String> set=  corrJson.keySet();
+	Iterator<String> iterator = set.iterator();
+	List<String> list = new ArrayList<>();
+	iterator.forEachRemaining(list::add);
+	
+	int size = convertedObject.get("correlationTable").getAsJsonObject().size();
+	%>
+	<table id="corr-table">
+        <thead   class="head-table">
+			<tr>
+				<%if(list.size()>0){ %>
+					<th></th>
+				<%} %>
+				<%for(int i = 0;i<list.size();i++){ %>
+					<th><%=list.get(i) %></th>
+				<%}%>
+			</tr>
+        </thead>            
+        <tbody class="body-table">
+        	<%for(int i=0;i<size;i++){ %>
+	            <tr>
+	            	<td class="label-mimic"><%=list.get(i)%></td>
+	            	<%for(int j = 0;j<size;j++){ %>
+	            		<td  class="data"><%=corrJson.get(list.get(i)).getAsJsonObject().get(list.get(j)) %>
+	            	<%} %>
+	            </tr>
+            <%} %>
+        </tbody>
+    </table>
   <script>
     function toggleAction(index){
       var x = document.getElementsByClassName("target-div")[index];
