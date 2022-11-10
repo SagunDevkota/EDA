@@ -85,9 +85,9 @@ public class DataDAOImpl implements DataDAO {
 	}
 
 	@Override
-	public void updateAccess() {
-		String query = "UPDATE access SET last_accessed_at = ?";
-		int update = jdbcTemplate.update(query,new Timestamp(System.currentTimeMillis()));
+	public void updateAccess(int fileId) {
+		String query = "UPDATE access SET last_accessed_at = ? WHERE d_id=?";
+		int update = jdbcTemplate.update(query,new Timestamp(System.currentTimeMillis()),fileId);
 		System.out.println(update);
 	}
 

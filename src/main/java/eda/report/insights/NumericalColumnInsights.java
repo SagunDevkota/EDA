@@ -155,13 +155,13 @@ public class NumericalColumnInsights{
 	 */
 	public HashMap<String,Integer> getHistogramData(){
 		HashMap<String, Integer> histData = new HashMap<>();
-		double factor = ((getMax()+(0.001*getMin()/100))-getMin())/9;
+		double factor = ((getMax()+(0.001*getMin()/100))-getMin())/10;
 		ArrayList<Double> nullRemovedRow = new ArrayList<>(row);
 		nullRemovedRow.replaceAll(t -> Objects.isNull(t) ? getMin()-1 : t);
 		int count = 0;
-		for(double i = getMin();count<10;i = i+factor) {
+		for(double i = getMin();(i+factor)<=getMax();i = i+factor) {
 			final double lower = i;
-			final double higher = i+factor;
+			final double higher = i+factor+0.000001;
 			List<Double> collect = nullRemovedRow.stream().collect(Collectors.groupingBy(v->(v>= lower && v<higher))).get(true);
 			if(collect != null) {
 				histData.put(""+higher, collect.size());

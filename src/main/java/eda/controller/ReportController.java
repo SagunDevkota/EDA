@@ -93,7 +93,7 @@ public class ReportController {
 			System.out.println(shared);
 			if((shared) != null) {
 				report = reportInitiator.getReport(session.getServletContext().getRealPath("/WEB-INF/resources/csv/")+shared.getHash()+".csv");
-				shareReportService.updateAccess();
+				shareReportService.updateAccess(fileId);
 			}else {
 				model.addAttribute("error", "You are not authorized");
 			}

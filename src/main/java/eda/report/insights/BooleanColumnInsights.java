@@ -116,9 +116,18 @@ public class BooleanColumnInsights{
 			final int c = i;
 			List<Boolean> collect = nullRemovedRow.stream().collect(Collectors.groupingBy(v->(v== list[c]))).get(true);
 			if(collect != null) {
-				histData.put(""+list[i], collect.size());
+				if(i == 0) {
+					histData.put("1.0", collect.size());
+				}else {
+					histData.put("0.0", collect.size());
+				}
+				
 			}else {
-				histData.put(""+list[i], 0);
+				if(i == 0) {
+					histData.put("1.0", 0);
+				}else {
+					histData.put("0.0", 0);
+				}
 			}
 		}
 		return histData;

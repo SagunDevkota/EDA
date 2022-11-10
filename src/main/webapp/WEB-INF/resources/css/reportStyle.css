@@ -63,8 +63,9 @@ html{
 }
 
 .variable-type {
-    margin-top: -305px;
+        /* margin-top: -305px; */
     /* display: inline-block; */
+    margin-top: -190px;
     border: 2px solid black;
     padding: 1rem 1rem;
     vertical-align: middle;
@@ -84,14 +85,7 @@ html{
     padding-left: 242px;
 }
 
-#myChart{
-    position: relative;
-    margin-top: 500px;
-    max-width: 350px; 
-    height: 200px; 
-    position: relative; 
-    float: right; 
-}
+
 
 #toggle-btn{
     margin-left: 80%;
@@ -124,12 +118,12 @@ section{
 }
 
 #corr-table {
-    
     min-width: max-content;
-    
     border-collapse: separate;
-    border-spacing: 0px;    
-    
+    border-spacing: 0px;
+    /* border-radius: 50%; */
+    margin-top: 50px;
+    margin-left: 30px;
 }
 
 #corr-table th,.label-mimic{

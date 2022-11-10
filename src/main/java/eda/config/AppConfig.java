@@ -83,6 +83,10 @@ public class AppConfig {
 		return new GsonBuilder().setPrettyPrinting().create();
 	}
 	
+	/**
+	 * Note: Create AccountConfiguration.java manually which is not shown for security purpose
+	 * @return JavaMailSender
+	 */
 	@Bean
 	public JavaMailSenderImpl javaMailSenderImpl() {
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();

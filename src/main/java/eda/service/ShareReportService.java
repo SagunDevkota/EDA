@@ -39,8 +39,8 @@ public class ShareReportService {
 		return false;
 	}
 	
-	public void updateAccess() {
-		dataDAOImpl.updateAccess();
+	public void updateAccess(int fileId) {
+		dataDAOImpl.updateAccess(fileId);
 	}
 	
 	public Timestamp getAccessTime(int ownerId,int reportId) {

@@ -1,3 +1,4 @@
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Set"%>
 <%@page import="com.google.gson.JsonElement"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -33,26 +34,7 @@
 	String jsonString = (String)request.getAttribute("json"); 
 	JsonObject convertedObject = new Gson().fromJson(jsonString, JsonObject.class);
 	%>
-	<canvas id="myChart"></canvas>
-
-    <script>
-    var xValues = [0, 15, 30, 35, 40];
-    var yValues = [55, 49, 64, 34, 35];
-
-    new Chart("myChart", {
-      type: "bar",
-      data: {
-        labels: xValues,
-        datasets: [{
-          backgroundColor: "blue",
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-      }
-    });
-    </script>
+<%-- 	<canvas id="myChart"></canvas> --%>
     <header class="header">
     
       <a href="./dashboard"><img src="<c:url value="/resources/images/logo.jpg"/>" alt="logo" class="logo"></a>
@@ -116,14 +98,99 @@
 
 	<h2>VARIABLES</h2>
 	
-  
-  <% 
+  <%
+    	
+ 
   	JsonArray columnReportArray = convertedObject.get("columnReport").getAsJsonArray();
   	for(int i = 0;i<columnReportArray.size();i++){
+  		System.out.println("Good "+i);
   		JsonObject obj = columnReportArray.get(i).getAsJsonObject();
+  		System.out.println(obj.get("columnType").getAsString());
+  		%>
+  		<section class="variable">
+		<div style="
+	    display: flex;
+	    flex-direction: row-reverse;
+		">
+		<div>
+  		<%if(obj.get("columnType").getAsString().equals("Numeric") || obj.get("columnType").getAsString().equals("Boolean")){
+  			System.out.println("in1 "+obj.get("columnType").getAsString());
+  			System.out.println(obj.get("histData").getAsJsonObject());
+	  		JsonObject histJson = obj.get("histData").getAsJsonObject();
+	  		System.out.println("in2 "+obj.get("columnType").getAsString());
+	    	Set<String> keysHist = histJson.keySet();
+	    	Iterator<String> histKeyIterator = keysHist.iterator();
+	    	List<Double> listHistKeys = new ArrayList<>();
+	    	List<Double> listHistVals = new ArrayList<>();
+	    	List<Double> refKeysOfHist = new ArrayList<>();
+	    	DecimalFormat format = new DecimalFormat("#.####");
+	    	while(histKeyIterator.hasNext()){
+	    		String key = histKeyIterator.next();
+	    		refKeysOfHist.add(Double.parseDouble(key));
+	    		listHistKeys.add(Double.parseDouble(format.format(Double.parseDouble(key))));
+	    	}
+	    	System.out.println("in3 "+obj.get("columnType").getAsString());
+	    	Collections.sort(listHistKeys);
+	    	Collections.sort(refKeysOfHist);
+	    	for(Double key: refKeysOfHist){
+	    		System.out.println(key);
+	    		System.out.println(histJson.get(String.valueOf(key)));
+	    		listHistVals.add(Double.parseDouble(histJson.get(String.valueOf(key)).getAsString()));
+				
+	    	}
+	    	System.out.println("Good "+i);
 %>
 
-	<section class="variable">
+
+	<canvas id="myChart-<%=i %>" width="400" height="400"></canvas>
+	</div>
+	<script type="text/javascript">
+		var ctx = document.getElementById("myChart-<%=i%>").getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: <%=listHistKeys%>,
+		        datasets: [{
+		            label: 'Frequency',
+		            data: <%=listHistVals%>,
+		            backgroundColor: [
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)'
+		            ],
+		            borderColor: [
+		            	'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)',
+		                'rgba(153, 102, 255, 1)',
+		                'rgba(255, 159, 64, 1)',
+		                'rgba(255, 99, 132, 1)',
+		                'rgba(54, 162, 235, 1)',
+		                'rgba(255, 206, 86, 1)',
+		                'rgba(75, 192, 192, 1)'
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            y: {
+		                beginAtZero: true
+		            }
+		        }
+		    }
+		});
+	</script>
+	<%} %>
+	<div>
 	<h2 style="padding-left: 2vw; margin-bottom:0px;"><%=obj.get("columnName").getAsString() %></h2>
       <p style="padding-left:3.5vw; margin: 0px; text-decoration-line: underline; text-decoration-style: dotted; "><%=obj.get("columnType").getAsString() %></p>
       <br>
@@ -176,6 +243,7 @@
       
       <%} %>
     </table>
+    
     <%if(obj.get("columnType").getAsString().equals(Constants.NUMERIC)){ %>
     <button id="toggle-btn" onclick="toggleAction(<%=currentNumericRow%>)" style="margin-bottom:1.5vh;">toggle details</button><br>
     
@@ -221,38 +289,41 @@
         <td><%=df.format(obj.get("numStats").getAsJsonObject().get("Variance").getAsDouble())%></td>
       </tr>
     </table>
+    
   </section>
   </div>
+  </div>
+  </div>
   <%currentNumericRow++;
-  }else if(obj.get("columnType").getAsString().equals(Constants.CATEGORICAL)){
-    	  %>
-    	  <h2>Frequency Analysis</h2>
-    	  <section class="statistics-details"> 
-    	  <table class="overview-table">  
-      	<%
-    	  JsonObject jsonObject = obj.get("catFrequency").getAsJsonObject();
-    	  Iterator<String> keys = jsonObject.keySet().iterator();
-    	  
-			int count = 0;
-    	  while(keys.hasNext()) {
-    	      String key = keys.next();
-    	      count++;
-    	      if(key == null){
-    	    	  break;
-    	      }
-    	      %>
-      				<tr>
-	    	          <th><%=key %></th>
-	    	          <td><%=obj.get("catFrequency").getAsJsonObject().get(key)%></td>
-	    	  	    </tr>
-    	  <%if(count==5){
-    		  break;
-    	  }
-    	  }%>
-    	   </table>
-    	   </section>
-      <%}%>
-  </section>
+	  }else if(obj.get("columnType").getAsString().equals(Constants.CATEGORICAL)){
+	    	  %>
+	    	  <h2>Frequency Analysis</h2>
+	    	  <section class="statistics-details"> 
+	    	  <table class="overview-table">  
+	      	<%
+	    	  JsonObject jsonObject = obj.get("catFrequency").getAsJsonObject();
+	    	  Iterator<String> keys = jsonObject.keySet().iterator();
+	    	  
+				int count = 0;
+	    	  while(keys.hasNext()) {
+	    	      String key = keys.next();
+	    	      count++;
+	    	      if(key == null){
+	    	    	  break;
+	    	      }
+	    	      %>
+	      				<tr>
+		    	          <th><%=key %></th>
+		    	          <td><%=obj.get("catFrequency").getAsJsonObject().get(key)%></td>
+		    	  	    </tr>
+	    	  <%if(count==5){
+	    		  break;
+	    	  }
+	    	  }%>
+	    	   </table>
+	    	   </section>
+	      <%}%>
+	  </section>
 <%} %>
 	<%
 	JsonObject corrJson = convertedObject.get("correlationTable").getAsJsonObject();

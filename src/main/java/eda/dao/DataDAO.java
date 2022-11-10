@@ -13,6 +13,6 @@ public interface DataDAO {
 	public List<Data> getAllData(int owner);
 	public Data getSharedData(int d_id,int viewer);
 	public List<Data> getAllSharedData(int viewer);
-	public void updateAccess();
+	public void updateAccess(int fileId);
 	public Timestamp getAccessTime(int data,int viewer);
 }
