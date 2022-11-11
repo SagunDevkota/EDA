@@ -1,5 +1,10 @@
 # EDA(Exploratory Data Analysis)
 
+EDA, is an exploratory data analysis platform, the primary objective of this project is to provide a reliable tool for exploratory data analysis to the people in an easy way.
+
+# Objectives
+> To provide a platform for statistical analysis of data (Distinct, Mean, Median, Standard Deviation, Variance, Co-efficient of variation, Skewness), detection of missing data.
+
 ## Installing Application
 > git clone https://github.com/SagunDevkota/EDA.git
 
