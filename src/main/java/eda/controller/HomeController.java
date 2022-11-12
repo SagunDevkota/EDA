@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
@@ -44,11 +45,11 @@ public class HomeController {
 		return "dashboard";
 	}
 	
-	@RequestMapping("/user/{name}")
-	public String user(@PathVariable("name") String name,Model model) {
-		model.addAttribute("name", name);
-		return "user";
-	}
+//	@RequestMapping("/user/{name}")
+//	public String user(@PathVariable("name") String name,Model model) {
+//		model.addAttribute("name", name);
+//		return "user";
+//	}
 		
 	@RequestMapping("/auth")
 	public String auth() {
